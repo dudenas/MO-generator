@@ -1,11 +1,10 @@
-let _lines = [];
-
 function setup() {
     setupCanvas();
 
     // set framerate
     frameRate(_params.frameRate)
 }
+
 
 function setupCanvas() {
     // remove all previous canvases
@@ -17,65 +16,78 @@ function setupCanvas() {
 
     cnv.parent("myCanvasWrapper")
 
-    setupGraphics();
-
-    // resizable canvas to fit the window
-    resizeCanvasOnScale()
-
     // init the saveSketch
     _saveSketch = new p5(svgSketch)
 
     pixelDensity(1)
-    // noLoop()
-
-    // set video sketch
-    _saveVideoSketch = new p5(videoSketch)
 
     // set video canvas
     _saveCanvas = createGraphics(_params.width * _sclGrfc, _params.height * _sclGrfc);
 
-    // set save frames 
-    saveSetupFrames()
+    // noLoop()
 }
+
+function drawRect(cnv, d1, y1, d2, y2) {
+    cnv.beginShape()
+    cnv.vertex(-d1, y1)
+    cnv.vertex(d1, y1)
+    cnv.vertex(d2, y2)
+    cnv.vertex(-d2, y2)
+    cnv.endShape(cnv.CLOSE)
+}
+
 
 function drawGraphics(cnv) {
     // show image
-    showImage(cnv)
+    cnv.push()
+    cnv.translate(cnv.width / 2, 0)
 
-    cnv.beginShape();
-    // style of the line
-    cnv.stroke(_params.colors.main);
-    cnv.strokeWeight(_params.strokeWeight);
-    cnv.noFill();
+    // variable for amount of rectangles
+    const amount = 9
+    // loop trough amount of rectangles, and draw them one by one filling height of the canvas
+    const boundaries = [cnv.width / 10, cnv.width / 5 * 2]
+    let prevD = random(boundaries[0], boundaries[1])
+    const flunctiontion = (boundaries[1] - boundaries[0]) / 2
 
-    const firstX = _lines[0].xPos - _lines[0].gapX
-    cnv.line(firstX, 0, firstX, height);
-    for (let i = 0; i < _lines.length; i += _params.numPoints) {
-        const x = _lines[i].xPos + _lines[i].gapX;
-        const y1 = 0;
-        const y2 = height;
-        cnv.line(x, y1, x, y2);
+    const randomY = generateRandomArray(amount)
+    let isFlat = false
+
+    let y1 = 0
+
+    cnv.noStroke()
+    for (let i = 0; i < amount; i++) {
+        // const y2 = (i + 1) * cnv.height / amount
+        const y2 = y1 + cnv.height * randomY[i]
+        const d1 = prevD
+        let d2 = i % 2 == 0 ? boundaries[1] - random(flunctiontion) : boundaries[0] + random(flunctiontion)
+
+        if (random(1) < 0.2 && !isFlat) {
+            d2 = d1
+            isFlat = true
+        }
+
+        // set color
+        if (i % 2 == 0) cnv.fill(_params.colors.main)
+        else cnv.fill(_params.colors.shadow)
+
+        // draw rect
+        drawRect(cnv, d1, y1, d2, y2)
+        prevD = d2
+        y1 = y2
     }
 
-    // draw the bezier lines
-    for (let i = 0; i < _lines.length; i++) {
-        _lines[i].draw(cnv);
-    }
-    cnv.endShape();
+    cnv.stroke(_params.colors.debug)
+    cnv.strokeWeight(_params.strokeWeight)
+    cnv.line(-boundaries[0], 0, -boundaries[0], cnv.height)
+    cnv.line(boundaries[0], 0, boundaries[0], cnv.height)
+    cnv.line(-boundaries[1], 0, -boundaries[1], cnv.height)
+    cnv.line(boundaries[1], 0, boundaries[1], cnv.height)
+    // cnv.translate(-cnv.width / 2, 0)
+    cnv.pop()
 }
 
 function draw() {
     _saveCanvas.clear()
-
-    // set a background of canvas
-    if (!(_recording && _saveFrames)) {
-        _saveCanvas.background(_params.colors.background)
-    }
-
-    // update the noise
-    if (_params.noiseAnimate) {
-        updateGraphics()
-    } else {}
 
     background(_params.colors.background);
 
@@ -85,24 +97,8 @@ function draw() {
     // show canvas
     image(_saveCanvas, 0, 0)
 
-    // show video update
-    showVIDEOupdate()
-
-    // update canvas if recording
-    if (_recording && _saveVideo) {
-        _saveVideoSketch.drawSketch()
-    }
-
     // update framerate
     updateFrameRate()
-
-    // save video frames
-    if (_recording && _saveFrames) {
-        if (_recordedFrames === 0) {
-            _capturer.start()
-        }
-        saveDrawFrames(_saveCanvas)
-    }
 }
 
 function updateFrameRate() {

@@ -19,7 +19,7 @@ let svgSketch = function (p) {
         p.clear()
         p.background(_params.colors.background);
         p.smooth(4)
-        drawGraphics(p)
+        // drawGraphics(p)
 
         if (_saveSVG) {
             p.save(`${getSaveFilename()}.svg`)
