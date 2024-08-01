@@ -31,13 +31,30 @@ function getSaveFilename() {
 }
 
 // generateRandomArray: Generates an array of random numbers that sum to 1
-function generateRandomArray(numPoints) {
+function generateRandomArray(numPoints, diversity, minValue) {
+    // Generate random values
     const randomValues = Array.from({
         length: numPoints
     }, () => Math.random());
 
+    // Calculate the sum of random values
     const sum = randomValues.reduce((a, b) => a + b, 0);
 
+    // Normalize the values
     const normalizedValues = randomValues.map(value => value / sum);
-    return normalizedValues
+
+    // Adjust values based on diversity
+    const equalValue = 1 / numPoints;
+    let adjustedValues = normalizedValues.map(value =>
+        value * (1 - diversity) + equalValue * diversity
+    );
+
+    // Ensure values are not less than minValue
+    adjustedValues = adjustedValues.map(value => Math.max(value, minValue));
+
+    // Normalize the adjusted values again to ensure they sum to 1
+    const adjustedSum = adjustedValues.reduce((a, b) => a + b, 0);
+    const finalValues = adjustedValues.map(value => value / adjustedSum);
+
+    return finalValues;
 }

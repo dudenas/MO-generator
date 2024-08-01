@@ -1,8 +1,8 @@
 let _params = {
-    width: 540,
-    height: 540,
+    width: 800,
+    height: 600,
 
-    frameRate: 3,
+    frameRate: 30,
 
     colors: {
         background: "#000",
@@ -15,6 +15,15 @@ let _params = {
     strokeWeight: 2,
 
     debug: false,
+
+    // graphics
+    rectAmount: 10,
+    boundariesMin: 100,
+    boundariesMax: 300,
+    flunctiontion: 1,
+    ySymetry: 0,
+    selectedLine: null,
+    selectedRect: null
 };
 
 let _sclGrfc = 1

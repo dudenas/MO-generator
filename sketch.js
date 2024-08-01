@@ -1,4 +1,7 @@
 function setup() {
+    initDatGUI()
+
+    // setup canvas
     setupCanvas();
 
     // set framerate
@@ -24,66 +27,43 @@ function setupCanvas() {
     // set video canvas
     _saveCanvas = createGraphics(_params.width * _sclGrfc, _params.height * _sclGrfc);
 
+    // setup graphics
+    setupGraphics(_saveCanvas)
+
     // noLoop()
 }
 
-function drawRect(cnv, d1, y1, d2, y2) {
-    cnv.beginShape()
-    cnv.vertex(-d1, y1)
-    cnv.vertex(d1, y1)
-    cnv.vertex(d2, y2)
-    cnv.vertex(-d2, y2)
-    cnv.endShape(cnv.CLOSE)
-}
-
+let _myRects
 
 function drawGraphics(cnv) {
     // show image
     cnv.push()
     cnv.translate(cnv.width / 2, 0)
+    _myRects.forEach(mr => {
+        mr.updateLine()
+        if (mr.idx < _myRects.length - 1) mr.controlsY()
+        mr.controlsFlat()
+        mr.update()
+        mr.drawRect(cnv)
+    })
 
-    // variable for amount of rectangles
-    const amount = 9
-    // loop trough amount of rectangles, and draw them one by one filling height of the canvas
-    const boundaries = [cnv.width / 10, cnv.width / 5 * 2]
-    let prevD = random(boundaries[0], boundaries[1])
-    const flunctiontion = (boundaries[1] - boundaries[0]) / 2
-
-    const randomY = generateRandomArray(amount)
-    let isFlat = false
-
-    let y1 = 0
-
-    cnv.noStroke()
-    for (let i = 0; i < amount; i++) {
-        // const y2 = (i + 1) * cnv.height / amount
-        const y2 = y1 + cnv.height * randomY[i]
-        const d1 = prevD
-        let d2 = i % 2 == 0 ? boundaries[1] - random(flunctiontion) : boundaries[0] + random(flunctiontion)
-
-        if (random(1) < 0.2 && !isFlat) {
-            d2 = d1
-            isFlat = true
-        }
-
-        // set color
-        if (i % 2 == 0) cnv.fill(_params.colors.main)
-        else cnv.fill(_params.colors.shadow)
-
-        // draw rect
-        drawRect(cnv, d1, y1, d2, y2)
-        prevD = d2
-        y1 = y2
-    }
-
-    cnv.stroke(_params.colors.debug)
-    cnv.strokeWeight(_params.strokeWeight)
-    cnv.line(-boundaries[0], 0, -boundaries[0], cnv.height)
-    cnv.line(boundaries[0], 0, boundaries[0], cnv.height)
-    cnv.line(-boundaries[1], 0, -boundaries[1], cnv.height)
-    cnv.line(boundaries[1], 0, boundaries[1], cnv.height)
+    // draw debug graphics
     // cnv.translate(-cnv.width / 2, 0)
     cnv.pop()
+}
+
+function debugGraphics() {
+    _myRects.forEach(mr => {
+        mr.drawControls()
+    })
+
+    // lines
+    stroke(_params.colors.debug)
+    strokeWeight(_params.strokeWeight)
+    line(-_params.boundariesMin + width / 2, 0, -_params.boundariesMin + width / 2, height)
+    line(_params.boundariesMin + width / 2, 0, _params.boundariesMin + width / 2, height)
+    line(-_params.boundariesMax + width / 2, 0, -_params.boundariesMax + width / 2, height)
+    line(_params.boundariesMax + width / 2, 0, _params.boundariesMax + width / 2, height)
 }
 
 function draw() {
@@ -91,11 +71,15 @@ function draw() {
 
     background(_params.colors.background);
 
+
     // draw graphics
     drawGraphics(_saveCanvas)
 
     // show canvas
     image(_saveCanvas, 0, 0)
+
+    // debug graphics
+    debugGraphics()
 
     // update framerate
     updateFrameRate()
