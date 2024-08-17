@@ -20,7 +20,7 @@ let _params = {
     rectAmount: 10,
     boundariesMin: 100,
     boundariesMax: 300,
-    flunctiontion: 0,
+    flunctiontion: 1.,
     ySymetry: 1.,
     selectedLine: null,
     selectedRect: null

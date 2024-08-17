@@ -34,6 +34,8 @@ myRect.prototype.drawControls = function () {
     fill(_params.colors.debug)
     textSize(12);
     text(this.inputType ? "in" : "out", width / 2 + 60, this.y2 - (this.y2 - this.y1) / 2 + 6)
+
+    text(this.idx, width / 2 - 40, this.y2 - (this.y2 - this.y1) / 2 + 6)
     pop()
 }
 

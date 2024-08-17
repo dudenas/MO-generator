@@ -22,12 +22,10 @@ class myRect {
     updateType() {
         const prevRect = this.idx > 1 ? _myRects[this.idx - 1] : null
         const nextRect = this.idx < _myRects.length - 1 ? _myRects[this.idx + 1] : null
-        // // console.log(prevRect)
+
         if (nextRect && !this.inputType) {
-            // if (nextRect.inputType = this.inputType) {
             // go trough rects from this idx and change all types
             for (let i = this.idx + 1; i < _myRects.length; i++) {
-                // _myRects[i].inputType = !_myRects[i].inputType
                 const oRect = _myRects[i]
                 if (!oRect.flat) {
                     _myRects[i].inputType = !_myRects[i].inputType
@@ -35,7 +33,6 @@ class myRect {
                     break
                 }
             }
-            // }
         }
         if (prevRect && this.inputType) {
             // go trough rects from this idx and change all types
@@ -71,6 +68,11 @@ class myRect {
             } else {
                 this.d2 = this.d1
             }
+        }
+
+        // edge case if next is flat
+        if (this.idx < _myRects.length - 1 && _myRects[this.idx + 1].flat) {
+            this.d2 = _myRects[this.idx + 1].d1
         }
 
     }
