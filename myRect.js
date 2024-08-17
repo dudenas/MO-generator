@@ -1,10 +1,13 @@
 class myRect {
-    constructor(idx, d1, y1, d2, y2) {
+    constructor(idx, d1, y1, d2, y2, type) {
         this.idx = idx
         this.dFactor1 = d1
         this.y1 = y1
         this.dFactor2 = d2
         this.y2 = y2
+
+
+        this.inputType = type // type 0 in type 1 out
     }
 
     updateLine() {
@@ -16,63 +19,33 @@ class myRect {
         }
     }
 
-    drawControls() {
-        const ellipseX = _params.boundariesMax
-        const ellipseY = this.y2
-        const ellipseRadius = 20
-
-        push()
-        noFill()
-        if (_params.selectedLine == this.idx) {
-            fill(_params.colors.debug)
-        }
-        strokeWeight(_params.strokeWeight)
-        stroke(_params.colors.debug)
-        ellipse(ellipseX + width / 2, ellipseY, ellipseRadius, ellipseRadius)
-
-
-        noFill()
-        if (this.flat) {
-            fill(_params.colors.debug)
-        }
-        ellipse(width / 2, this.y2 - (this.y2 - this.y1) / 2, ellipseRadius, ellipseRadius)
-        pop()
-    }
-
-    controlsY() {
-        const ellipseX = _params.boundariesMax
-        const ellipseY = this.y2
-        const ellipseRadius = 20
-
-        const sideEllipse = this.checkCollision(ellipseX, ellipseY, ellipseRadius)
-        if (sideEllipse) {
-            // check whether mouse is clicked
-            if (mouseIsPressed && _params.selectedLine == null) {
-                // _params.selectedLine = this.idx
-                _params.selectedLine = this.idx
+    updateType() {
+        const prevRect = this.idx > 1 ? _myRects[this.idx - 1] : null
+        const nextRect = this.idx < _myRects.length - 1 ? _myRects[this.idx + 1] : null
+        // // console.log(prevRect)
+        if (nextRect && !this.inputType) {
+            // if (nextRect.inputType = this.inputType) {
+            // go trough rects from this idx and change all types
+            for (let i = this.idx + 1; i < _myRects.length; i++) {
+                // _myRects[i].inputType = !_myRects[i].inputType
+                const oRect = _myRects[i]
+                if (!oRect.flat) {
+                    _myRects[i].inputType = !_myRects[i].inputType
+                } else {
+                    break
+                }
             }
-            // if mouse is released
-            else if (!mouseIsPressed) {
-                _params.selectedLine = null
-            }
+            // }
         }
-    }
-
-    controlsFlat() {
-        const exFlat = 0
-        const eyFlat = this.y2 - (this.y2 - this.y1) / 2
-        const erFlat = 20
-
-
-        const flatEllipse = this.checkCollision(exFlat, eyFlat, erFlat)
-        if (flatEllipse) {
-            // check whether mouse is clicked
-            if (mouseIsPressed && _params.selectedRect == null) {
-                this.flat = !this.flat
-                _params.selectedRect = this.idx
-            }
-            if (!mouseIsPressed) {
-                _params.selectedRect = null
+        if (prevRect && this.inputType) {
+            // go trough rects from this idx and change all types
+            for (let i = this.idx - 1; i >= 0; i--) {
+                const oRect = _myRects[i]
+                if (!oRect.flat) {
+                    _myRects[i].inputType = !_myRects[i].inputType
+                } else {
+                    break
+                }
             }
         }
     }
@@ -80,17 +53,26 @@ class myRect {
     update() {
         const flunctiontion = (_params.boundariesMax - _params.boundariesMin) / 2 * _params.flunctiontion
 
-        this.d1 = this.idx > 0 ? _myRects[this.idx - 1].d2 : _params.boundariesMin + this.dFactor1 * flunctiontion
-        this.d2 = this.idx % 2 == 0 ? _params.boundariesMax - this.dFactor2 * flunctiontion : _params.boundariesMin + this.dFactor2 * flunctiontion
+        this.d1 = this.idx > 0 ?
+            _myRects[this.idx - 1].d2 :
+            _params.boundariesMin + this.dFactor1 * flunctiontion
+        this.d2 = this.inputType ?
+            _params.boundariesMax - this.dFactor2 * flunctiontion :
+            _params.boundariesMin + this.dFactor2 * flunctiontion
 
-        if (this.flat) {
-            this.d2 = this.d1
+
+        if (this.idx == 0 && !this.inputType) {
+            this.d1 = _params.boundariesMax - this.dFactor1 * flunctiontion
         }
 
-        // TODO: check this one and maybe improve it
-        // if (this.idx == 2) {
-        //     this.dFactor2 = map(mouseX, 0, width, 0, 1)
-        // }
+        if (this.flat) {
+            if (this.inputType) {
+                this.d1 = this.d2
+            } else {
+                this.d2 = this.d1
+            }
+        }
+
     }
 
     drawRect(cnv) {
@@ -106,12 +88,5 @@ class myRect {
         cnv.vertex(this.d2, this.y2)
         cnv.vertex(-this.d2, this.y2)
         cnv.endShape(cnv.CLOSE)
-    }
-
-    checkCollision(ellipseX, ellipseY, ellipseRadius) {
-        // Check if the mouse is hovering over the ellipse
-        const distance = Math.sqrt((mouseX - ellipseX - width / 2) ** 2 + (mouseY - ellipseY) ** 2);
-        const isHovered = distance < ellipseRadius / 2;
-        return isHovered
     }
 }

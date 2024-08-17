@@ -16,7 +16,7 @@ function initDatGUI() {
         });
     gui.add(_params, 'ySymetry', 0, 1, 0.1).name('Y Symetry')
         .onFinishChange(value => {
-            setupGraphics(_saveCanvas);
+            updateGraphics(_saveCanvas);
         });
     gui.add(_params, 'flunctiontion', 0, 1, 0.1).name('Y flunctiontion')
     gui.add(_params, 'boundariesMin', 0, _params.width / 2, 10).name('Boundaries min')

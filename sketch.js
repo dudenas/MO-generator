@@ -43,6 +43,7 @@ function drawGraphics(cnv) {
         mr.updateLine()
         if (mr.idx < _myRects.length - 1) mr.controlsY()
         mr.controlsFlat()
+        mr.controlsType()
         mr.update()
         mr.drawRect(cnv)
     })
