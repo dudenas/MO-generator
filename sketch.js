@@ -35,43 +35,10 @@ function setupCanvas() {
 
 let _myRects
 
-function drawGraphics(cnv) {
-    // show image
-    cnv.push()
-    cnv.translate(cnv.width / 2, 0)
-    _myRects.forEach(mr => {
-        mr.updateLine()
-        if (mr.idx < _myRects.length - 1) mr.controlsY()
-        mr.controlsFlat()
-        mr.controlsType()
-        mr.update()
-        mr.drawRect(cnv)
-    })
-
-    // draw debug graphics
-    // cnv.translate(-cnv.width / 2, 0)
-    cnv.pop()
-}
-
-function debugGraphics() {
-    _myRects.forEach(mr => {
-        mr.drawControls()
-    })
-
-    // lines
-    stroke(_params.colors.debug)
-    strokeWeight(_params.strokeWeight)
-    line(-_params.boundariesMin + width / 2, 0, -_params.boundariesMin + width / 2, height)
-    line(_params.boundariesMin + width / 2, 0, _params.boundariesMin + width / 2, height)
-    line(-_params.boundariesMax + width / 2, 0, -_params.boundariesMax + width / 2, height)
-    line(_params.boundariesMax + width / 2, 0, _params.boundariesMax + width / 2, height)
-}
-
 function draw() {
     _saveCanvas.clear()
 
     background(_params.colors.background);
-
 
     // draw graphics
     drawGraphics(_saveCanvas)

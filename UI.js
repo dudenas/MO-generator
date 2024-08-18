@@ -4,8 +4,11 @@ function initDatGUI() {
 
     // Define buttons as properties of an object
     let buttons = {
-        regenerate: () => {
+        regenerateGraphics: () => {
             setupGraphics(_saveCanvas);
+        },
+        regenerateAnimation: () => {
+            updateGraphics(_saveCanvas);
         }
     };
 
@@ -18,11 +21,20 @@ function initDatGUI() {
         .onFinishChange(value => {
             updateGraphics(_saveCanvas);
         });
-    gui.add(_params, 'flunctiontion', 0, 1, 0.1).name('Y flunctiontion')
+    gui.add(_params, 'flunctiotion', 0, 1, 0.1).name('Y flunctiotion').onFinishChange(value => {
+        updateFlunctiotion();
+    });
     gui.add(_params, 'boundariesMin', 0, _params.width / 2, 10).name('Boundaries min')
     gui.add(_params, 'boundariesMax', 0, _params.width / 2, 10).name('Boundaries max')
 
+    gui.add(_params, 'runAnimation').name('Run animation')
+    gui.add(_params, 'animationFrames', 20, 60, 1).name('Animation frames per stage')
+    gui.add(_params, 'totalAnimationStages', 3, 7, 1).name('Animation stages').onFinishChange(value => {
+        animationParamsGenerate(_saveCanvas);
+    })
 
-    gui.add(buttons, 'regenerate').name('regenerate');
+
+    gui.add(buttons, 'regenerateGraphics').name('new graphics');
+    gui.add(buttons, 'regenerateAnimation').name('new animation');
     // You can add more sliders or other controls as needed
 }

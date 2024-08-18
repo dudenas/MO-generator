@@ -1,3 +1,4 @@
+// ————————————————————————————————————————————————————————————————————————————————— Collision
 myRect.prototype.checkCollision = function (ellipseX, ellipseY, ellipseRadius) {
     // Check if the mouse is hovering over the ellipse
     const distance = Math.sqrt((mouseX - ellipseX - width / 2) ** 2 + (mouseY - ellipseY) ** 2);
@@ -5,6 +6,7 @@ myRect.prototype.checkCollision = function (ellipseX, ellipseY, ellipseRadius) {
     return isHovered
 }
 
+// ————————————————————————————————————————————————————————————————————————————————— Draw controls
 myRect.prototype.drawControls = function () {
     const ellipseX = _params.boundariesMax
     const ellipseY = this.y2
@@ -39,6 +41,7 @@ myRect.prototype.drawControls = function () {
     pop()
 }
 
+// ————————————————————————————————————————————————————————————————————————————————— Controls Y
 myRect.prototype.controlsY = function () {
     const ellipseX = _params.boundariesMax
     const ellipseY = this.y2
@@ -58,6 +61,7 @@ myRect.prototype.controlsY = function () {
     }
 }
 
+// ————————————————————————————————————————————————————————————————————————————————— Controls Type
 myRect.prototype.controlsType = function () {
     const exFlat = 40
     const eyFlat = this.y2 - (this.y2 - this.y1) / 2
@@ -75,6 +79,8 @@ myRect.prototype.controlsType = function () {
         }
     }
 }
+
+// ————————————————————————————————————————————————————————————————————————————————— Controls Flat
 myRect.prototype.controlsFlat = function () {
     const exFlat = 0
     const eyFlat = this.y2 - (this.y2 - this.y1) / 2

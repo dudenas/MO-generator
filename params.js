@@ -1,6 +1,6 @@
 let _params = {
     width: 800,
-    height: 600,
+    height: 800,
 
     frameRate: 30,
 
@@ -18,12 +18,18 @@ let _params = {
 
     // graphics
     rectAmount: 10,
-    boundariesMin: 100,
-    boundariesMax: 300,
-    flunctiontion: 1.,
-    ySymetry: 1.,
+    boundariesMin: 50,
+    boundariesMax: 200,
+    flunctiotion: 1.,
+    ySymetry: 0.2,
     selectedLine: null,
-    selectedRect: null
+    selectedRect: null,
+
+    // animation
+    runAnimation: true,
+    animationFrames: 30,
+    animationIndex: 0,
+    totalAnimationStages: 6,
 };
 
 let _sclGrfc = 1

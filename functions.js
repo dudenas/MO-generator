@@ -58,3 +58,55 @@ function generateRandomArray(numPoints, diversity, minValue) {
 
     return finalValues;
 }
+
+// generateRandomArray: Generates an array of random numbers that sum to 1
+function generateRandomArrayZero(numPoints, diversity, minValue) {
+    // Generate random values
+    const randomValues = Array.from({
+        length: numPoints
+    }, () => Math.random());
+
+    const rnd = random(1)
+    // const numRectsToHide = Math.floor(numPoints / 3) % 2 == 0 ? Math.floor(numPoints / 3) + 1 : Math.floor(numPoints / 3)
+    const numRectsToHide = Math.floor(numPoints / 3)
+    if (rnd < .33) {
+        for (let i = 0; i < numRectsToHide; i++) {
+            randomValues[i] = 0
+        }
+    } else if (rnd < 0.66) {
+        for (let i = 0; i < numRectsToHide; i++) {
+            randomValues[numPoints - i - 1] = 0
+        }
+    }
+
+    // Calculate the sum of random values
+    const sum = randomValues.reduce((a, b) => a + b, 0);
+
+    // Normalize the values
+    const normalizedValues = randomValues.map(value => value / sum);
+
+    // Adjust values based on diversity
+    const equalValue = 1 / numPoints;
+    let adjustedValues = normalizedValues.map(value => {
+        if (value != 0) {
+            return value * (1 - diversity) + equalValue * diversity
+        } else {
+            return 0
+        }
+    });
+
+    // Ensure values are not less than minValue
+    adjustedValues = adjustedValues.map(value => {
+        if (value != 0) {
+            return Math.max(value, minValue)
+        } else {
+            return 0
+        }
+    });
+
+    // Normalize the adjusted values again to ensure they sum to 1
+    const adjustedSum = adjustedValues.reduce((a, b) => a + b, 0);
+    const finalValues = adjustedValues.map(value => value / adjustedSum);
+
+    return finalValues;
+}
