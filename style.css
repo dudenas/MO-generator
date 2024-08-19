@@ -1,0 +1,8 @@
+#myCanvasWrapper {
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    transform-origin: center;
+    transform: translate(-50%, -50%);
+    /* transform: translate(-50%, -50%) rotate(90deg); */
+}

@@ -3,7 +3,8 @@ myRect.prototype.updateLine = function () {
     if (_params.selectedLine == this.idx) {
         // this.y1 = 0
         const max = _myRects[this.idx + 1].y2
-        this.y2 = map(constrain(mouseY, this.y1, max), this.y1, max, this.y1, max)
+        const pMouseY = _params.graphicsHorizontal ? width - mouseX : mouseY;
+        this.y2 = map(constrain(pMouseY, this.y1, max), this.y1, max, this.y1, max)
         _myRects[this.idx + 1].y1 = this.y2
     }
 }
@@ -43,18 +44,29 @@ myRect.prototype.updateAnimation = function () {
     percent = normalizedErf(percent)
 
     const ap = this.animationParams[_params.animationIndex]
-    if (percent <= 1) {
+    if (percent <= 1 && percent > 0) {
         const prevIdx = _params.animationIndex === 0 ? _params.totalAnimationStages - 1 : _params.animationIndex - 1
         const ap_prev = this.animationParams[prevIdx]
 
-        this.dFactor1 = lerp(ap_prev.dFactor1, ap.dFactor1, percent)
+        const temp = (this.y2 - this.y1) / _saveCanvas.height * (_params.rectAmount / 2)
+        if (_params.flunctiotionNatural == true) {
+            this.dFactor1 = constrain(temp, 0, 1)
+        } else {
+            this.dFactor1 = lerp(ap_prev.dFactor1, ap.dFactor1, percent)
+        }
         this.y1 = lerp(ap_prev.y1, ap.y1, percent)
-        this.dFactor2 = lerp(ap_prev.dFactor2, ap.dFactor2, percent)
+        if (_params.flunctiotionNatural == true) {
+            this.dFactor2 = constrain(temp, 0, 1)
+        } else {
+            this.dFactor2 = lerp(ap_prev.dFactor2, ap.dFactor2, percent)
+        }
         this.y2 = lerp(ap_prev.y2, ap.y2, percent)
 
         this.count++
-    } else {
+    } else if (percent > 1) {
         this.finished = true
+    } else if (percent <= 0) {
+        this.count++
     }
 }
 
@@ -77,6 +89,17 @@ function normalizedErf(_x) {
 // ————————————————————————————————————————————————————————————————————————————————— MAIN UPDATE
 myRect.prototype.update = function () {
     const flunctiontion = (_params.boundariesMax - _params.boundariesMin) / 2 * this.flunctVal
+
+    const temp = (this.y2 - this.y1) / _saveCanvas.height * (_params.rectAmount / 2)
+    if (!_params.runAnimation) {
+        if (_params.flunctiotionNatural == true) {
+            this.dFactor1 = constrain(temp, 0, 1)
+            this.dFactor2 = constrain(temp, 0, 1)
+        } else {
+            this.dFactor1 = this.animationParams[_params.animationIndex].dFactor1
+            this.dFactor2 = this.animationParams[_params.animationIndex].dFactor2
+        }
+    }
 
     this.d1 = this.idx > 0 ?
         _myRects[this.idx - 1].d2 :

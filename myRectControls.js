@@ -1,7 +1,10 @@
 // ————————————————————————————————————————————————————————————————————————————————— Collision
 myRect.prototype.checkCollision = function (ellipseX, ellipseY, ellipseRadius) {
+    const pMouseX = _params.graphicsHorizontal ? mouseY - height / 2 + width / 2 : mouseX
+    const pMouseY = _params.graphicsHorizontal ? width - mouseX : mouseY;
+
     // Check if the mouse is hovering over the ellipse
-    const distance = Math.sqrt((mouseX - ellipseX - width / 2) ** 2 + (mouseY - ellipseY) ** 2);
+    const distance = Math.sqrt((pMouseX - ellipseX - width / 2) ** 2 + (pMouseY - ellipseY) ** 2);
     const isHovered = distance < ellipseRadius / 2;
     return isHovered
 }
@@ -13,6 +16,17 @@ myRect.prototype.drawControls = function () {
     const ellipseRadius = 20
 
     push()
+    if (_params.graphicsHorizontal) {
+        translate(width / 2, height / 2)
+        rotate(PI / 2)
+        translate(-width / 2, -height / 2)
+        // translate(0, width / 2)
+        translate(0, height / 2 - width / 2)
+    }
+    const pMouseX = _params.graphicsHorizontal ? mouseY - height / 2 + width / 2 : mouseX
+    const pMouseY = _params.graphicsHorizontal ? width - mouseX : mouseY;
+    ellipse(pMouseX, pMouseY, 50, 50)
+
     noFill()
     if (_params.selectedLine == this.idx) {
         fill(_params.colors.debug)
@@ -28,7 +42,11 @@ myRect.prototype.drawControls = function () {
     }
     ellipse(width / 2, this.y2 - (this.y2 - this.y1) / 2, ellipseRadius, ellipseRadius)
 
+    // TTYPE
     noFill()
+    if (this.inputType) {
+        fill(_params.colors.debug)
+    }
     ellipse(width / 2 + 40, this.y2 - (this.y2 - this.y1) / 2, ellipseRadius, ellipseRadius)
 
 
@@ -56,6 +74,10 @@ myRect.prototype.controlsY = function () {
         }
         // if mouse is released
         else if (!mouseIsPressed) {
+            _params.selectedLine = null
+        }
+    } else {
+        if (mouseIsPressed && _params.selectedLine == this.idx) {
             _params.selectedLine = null
         }
     }

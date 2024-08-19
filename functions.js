@@ -60,7 +60,7 @@ function generateRandomArray(numPoints, diversity, minValue) {
 }
 
 // generateRandomArray: Generates an array of random numbers that sum to 1
-function generateRandomArrayZero(numPoints, diversity, minValue) {
+function generateRandomArrayZero(numPoints, diversity, minValue, animationWithin) {
     // Generate random values
     const randomValues = Array.from({
         length: numPoints
@@ -68,14 +68,16 @@ function generateRandomArrayZero(numPoints, diversity, minValue) {
 
     const rnd = random(1)
     // const numRectsToHide = Math.floor(numPoints / 3) % 2 == 0 ? Math.floor(numPoints / 3) + 1 : Math.floor(numPoints / 3)
-    const numRectsToHide = Math.floor(numPoints / 3)
-    if (rnd < .33) {
-        for (let i = 0; i < numRectsToHide; i++) {
-            randomValues[i] = 0
-        }
-    } else if (rnd < 0.66) {
-        for (let i = 0; i < numRectsToHide; i++) {
-            randomValues[numPoints - i - 1] = 0
+    if (!animationWithin) {
+        const numRectsToHide = Math.floor(numPoints / 3)
+        if (rnd < .33) {
+            for (let i = 0; i < numRectsToHide; i++) {
+                randomValues[i] = 0
+            }
+        } else if (rnd < 0.66) {
+            for (let i = 0; i < numRectsToHide; i++) {
+                randomValues[numPoints - i - 1] = 0
+            }
         }
     }
 

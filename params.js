@@ -1,5 +1,5 @@
 let _params = {
-    width: 800,
+    width: 300,
     height: 800,
 
     frameRate: 30,
@@ -18,15 +18,20 @@ let _params = {
 
     // graphics
     rectAmount: 10,
-    boundariesMin: 50,
+    boundariesMinFactor: .2,
+    boundariesMaxFactor: 1.,
+    boundariesMin: 40,
     boundariesMax: 200,
     flunctiotion: 1.,
     ySymetry: 0.2,
     selectedLine: null,
     selectedRect: null,
+    graphicsHorizontal: true,
 
     // animation
-    runAnimation: true,
+    runAnimation: false,
+    animationWithin: false,
+    flunctiotionNatural: true,
     animationFrames: 30,
     animationIndex: 0,
     totalAnimationStages: 6,

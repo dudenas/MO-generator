@@ -17,12 +17,16 @@ function animationParamsGenerate(cnv) {
     for (let n = 0; n < _params.totalAnimationStages; n++) {
         // loop trough amount of rectangles, and draw them one by one filling height of the canvas
         // const randomY = generateRandomArray(_params.rectAmount, _params.ySymetry, 0.01)
-        const randomY = generateRandomArrayZero(_params.rectAmount, _params.ySymetry, 0.01)
+        const randomY = generateRandomArrayZero(_params.rectAmount, _params.ySymetry, 0.01, _params.animationWithin)
 
         let y1 = 0
 
         for (let i = 0; i < _params.rectAmount; i++) {
-            const y2 = y1 + cnv.height * randomY[i]
+            // const y2 = y1 + cnv.width * randomY[i]
+            let y2 = y1 + cnv.height * randomY[i]
+            if (_params.graphicsHorizontal) {
+                y2 = y1 + cnv.width * randomY[i]
+            }
             let d1 = random(1) // works only for the first one
             let d2 = random(1)
 
@@ -31,9 +35,10 @@ function animationParamsGenerate(cnv) {
             // setup animation initial params
             if (n === 0) {
                 // if (i === 0) {
-                console.log('Initializing animationParams array');
+                // console.log('Initializing animationParams array');
                 mr.animationParams = [];
             }
+
 
             mr.animationParams[n] = {
                 y1: y1,
@@ -57,7 +62,10 @@ function updateGraphics(cnv) {
     let y1 = 0
 
     for (let i = 0; i < _params.rectAmount; i++) {
-        const y2 = y1 + cnv.height * randomY[i]
+        let y2 = y1 + cnv.height * randomY[i]
+        if (_params.graphicsHorizontal) {
+            y2 = y1 + cnv.width * randomY[i]
+        }
         let d1 = random(1) // works only for the first one
         let d2 = random(1)
 
