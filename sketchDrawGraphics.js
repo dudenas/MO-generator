@@ -4,9 +4,6 @@ function drawGraphics(cnv) {
     if (_params.graphicsHorizontal) {
         cnv.translate(cnv.width / 2, cnv.height / 2)
         cnv.rotate(PI / 2)
-        // const ratioX = _params.height / _params.width
-        // const ratioY = _params.width / _params.height
-        // cnv.scale(ratioX, ratioY)
         cnv.translate(-cnv.width / 2, -cnv.height / 2)
         cnv.translate(0, cnv.height / 2 - cnv.width / 2)
     }
@@ -35,7 +32,6 @@ function drawGraphics(cnv) {
     }
 
     // draw debug graphics
-    // cnv.translate(-cnv.width / 2, 0)
     cnv.pop()
 }
 
@@ -54,17 +50,20 @@ function debugGraphics() {
     _myRects.forEach(mr => {
         mr.drawControls()
     })
-    // translate(width / 2, height / 2)
-    // const ratioX = _params.height / _params.width
-    // const ratioY = _params.width / _params.height
-    // scale(ratioX, ratioY)
-    // rotate(PI / 2)
-    // translate(-width / 2, -height / 2)
+
     // lines
     stroke(_params.colors.debug)
     strokeWeight(_params.strokeWeight)
-    line(-_params.boundariesMin + width / 2, 0, -_params.boundariesMin + width / 2, height)
-    line(_params.boundariesMin + width / 2, 0, _params.boundariesMin + width / 2, height)
-    line(-_params.boundariesMax + width / 2, 0, -_params.boundariesMax + width / 2, height)
-    line(_params.boundariesMax + width / 2, 0, _params.boundariesMax + width / 2, height)
+
+    if (_params.graphicsHorizontal) {
+        line(0, -_params.boundariesMin + height / 2, width, -_params.boundariesMin + height / 2)
+        line(0, _params.boundariesMin + height / 2, width, _params.boundariesMin + height / 2)
+        line(0, -_params.boundariesMax + height / 2, width, -_params.boundariesMax + height / 2)
+        line(0, _params.boundariesMax + height / 2, width, _params.boundariesMax + height / 2)
+    } else {
+        line(-_params.boundariesMin + width / 2, 0, -_params.boundariesMin + width / 2, height)
+        line(_params.boundariesMin + width / 2, 0, _params.boundariesMin + width / 2, height)
+        line(-_params.boundariesMax + width / 2, 0, -_params.boundariesMax + width / 2, height)
+        line(_params.boundariesMax + width / 2, 0, _params.boundariesMax + width / 2, height)
+    }
 }

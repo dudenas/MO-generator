@@ -43,14 +43,7 @@ function draw() {
     // draw graphics
     drawGraphics(_saveCanvas)
 
-    // show canvas
-    // translate(width / 2, height / 2)
-    // rotate(PI / 2)
-    // const ratioX = _params.height / _params.width
-    // const ratioY = _params.width / _params.height
-    // scale(ratioX, ratioY)
-    // translate(-width / 2, -height / 2)
-
+    // show save canvas
     image(_saveCanvas, 0, 0)
 
     // debug graphics

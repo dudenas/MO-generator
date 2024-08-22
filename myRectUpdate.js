@@ -48,7 +48,10 @@ myRect.prototype.updateAnimation = function () {
         const prevIdx = _params.animationIndex === 0 ? _params.totalAnimationStages - 1 : _params.animationIndex - 1
         const ap_prev = this.animationParams[prevIdx]
 
-        const temp = (this.y2 - this.y1) / _saveCanvas.height * (_params.rectAmount / 2)
+        let temp = (this.y2 - this.y1) / _saveCanvas.height * (_params.rectAmount / 2)
+        if (_params.graphicsHorizontal) {
+            temp = (this.y2 - this.y1) / _saveCanvas.width * (_params.rectAmount / 2)
+        }
         if (_params.flunctiotionNatural == true) {
             this.dFactor1 = constrain(temp, 0, 1)
         } else {
@@ -90,7 +93,10 @@ function normalizedErf(_x) {
 myRect.prototype.update = function () {
     const flunctiontion = (_params.boundariesMax - _params.boundariesMin) / 2 * this.flunctVal
 
-    const temp = (this.y2 - this.y1) / _saveCanvas.height * (_params.rectAmount / 2)
+    let temp = (this.y2 - this.y1) / _saveCanvas.height * (_params.rectAmount / 2)
+    if (_params.graphicsHorizontal) {
+        temp = (this.y2 - this.y1) / _saveCanvas.width * (_params.rectAmount / 2)
+    }
     if (!_params.runAnimation) {
         if (_params.flunctiotionNatural == true) {
             this.dFactor1 = constrain(temp, 0, 1)

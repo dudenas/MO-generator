@@ -9,6 +9,16 @@ function setupGraphics(cnv) {
     updateGraphics(cnv)
 
     animationParamsGenerate(cnv)
+
+    updateBoundaries()
+}
+
+function setupGraphicsUpdate(cnv) {
+    updateGraphics(cnv)
+
+    animationParamsGenerate(cnv)
+
+    updateBoundaries()
 }
 
 function animationParamsGenerate(cnv) {
@@ -16,7 +26,6 @@ function animationParamsGenerate(cnv) {
 
     for (let n = 0; n < _params.totalAnimationStages; n++) {
         // loop trough amount of rectangles, and draw them one by one filling height of the canvas
-        // const randomY = generateRandomArray(_params.rectAmount, _params.ySymetry, 0.01)
         const randomY = generateRandomArrayZero(_params.rectAmount, _params.ySymetry, 0.01, _params.animationWithin)
 
         let y1 = 0
@@ -34,11 +43,8 @@ function animationParamsGenerate(cnv) {
 
             // setup animation initial params
             if (n === 0) {
-                // if (i === 0) {
-                // console.log('Initializing animationParams array');
                 mr.animationParams = [];
             }
-
 
             mr.animationParams[n] = {
                 y1: y1,

@@ -1,6 +1,6 @@
 let _params = {
-    width: 300,
-    height: 800,
+    width: 800,
+    height: 400,
 
     frameRate: 30,
 
