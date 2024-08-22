@@ -19,9 +19,6 @@ function setupCanvas() {
 
     cnv.parent("myCanvasWrapper")
 
-    // init the saveSketch
-    _saveSketch = new p5(svgSketch)
-
     pixelDensity(1)
 
     // set video canvas
@@ -29,6 +26,12 @@ function setupCanvas() {
 
     // setup graphics
     setupGraphics(_saveCanvas)
+
+    // resizable canvas to fit the window
+    resizeCanvasOnScale()
+
+    // init the saveSketch
+    _saveSketch = new p5(svgSketch)
 
     // noLoop()
 }

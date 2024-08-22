@@ -1,5 +1,5 @@
 let _params = {
-    width: 800,
+    width: 1200,
     height: 400,
 
     frameRate: 30,
@@ -29,7 +29,7 @@ let _params = {
     graphicsHorizontal: true,
 
     // animation
-    runAnimation: false,
+    runAnimation: true,
     animationWithin: false,
     flunctiotionNatural: true,
     animationFrames: 30,

@@ -1,7 +1,7 @@
 // ————————————————————————————————————————————————————————————————————————————————— Collision
 myRect.prototype.checkCollision = function (ellipseX, ellipseY, ellipseRadius) {
-    const pMouseX = _params.graphicsHorizontal ? mouseY - height / 2 + width / 2 : mouseX
-    const pMouseY = _params.graphicsHorizontal ? width - mouseX : mouseY;
+    const pMouseX = _params.graphicsHorizontal ? -1 * (height / 2 - width / 2) + (mouseY / testScale) : (mouseX / testScale)
+    const pMouseY = _params.graphicsHorizontal ? width - mouseX / testScale : (mouseY / testScale);
 
     // Check if the mouse is hovering over the ellipse
     const distance = Math.sqrt((pMouseX - ellipseX - width / 2) ** 2 + (pMouseY - ellipseY) ** 2);
@@ -23,9 +23,10 @@ myRect.prototype.drawControls = function () {
         // translate(0, width / 2)
         translate(0, height / 2 - width / 2)
     }
-    const pMouseX = _params.graphicsHorizontal ? mouseY - height / 2 + width / 2 : mouseX
-    const pMouseY = _params.graphicsHorizontal ? width - mouseX : mouseY;
-    ellipse(pMouseX, pMouseY, 50, 50)
+
+    const pMouseX = _params.graphicsHorizontal ? -1 * (height / 2 - width / 2) + (mouseY / testScale) : (mouseX / testScale)
+    const pMouseY = _params.graphicsHorizontal ? width - mouseX / testScale : (mouseY / testScale);
+    ellipse(pMouseX, pMouseY, 20, 20)
 
     noFill()
     if (_params.selectedLine == this.idx) {

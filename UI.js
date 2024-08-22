@@ -19,8 +19,13 @@ function initDatGUI() {
         regenerateGraphics: () => {
             setupGraphics(_saveCanvas);
         },
-        regenerateAnimation: () => {
-            updateGraphics(_saveCanvas);
+        saveSVG: () => {
+            _saveSVG = true
+            _saveSketch.redraw()
+        },
+        savePNG: () => {
+            _savePNG = true
+            _saveSketch.redraw()
         }
     };
 
@@ -71,6 +76,42 @@ function initDatGUI() {
 
 
     gui.add(buttons, 'regenerateGraphics').name('new graphics');
-    gui.add(buttons, 'regenerateAnimation').name('new animation');
     // You can add more sliders or other controls as needed
+    gui.add(buttons, 'saveSVG').name('save SVG');
+    gui.add(buttons, 'savePNG').name('save PNG');
+}
+
+let testScale = 1;
+
+// Resizing the canvas
+function scaleBasedOnWindow(elm, scale = 1, fit = false) {
+    // get window width - UI-container width
+    // let targetScale = scale / (elm.clientWidth / (window.innerWidth - 462 - 48));
+    let targetScale = scale / (elm.clientWidth / (window.innerWidth));
+    scale = Math.max(0.1, scale);
+
+    let scaleFactor = 0;
+    if (fit) {
+        scaleFactor = scale / Math.max(elm.clientWidth / window.innerWidth, elm.clientHeight / window.innerHeight);
+
+        scaleFactor = Math.min(scaleFactor, targetScale);
+        elm.style.transform = `scale(${Math.min(scaleFactor, scale)}) translate(-50%, -50%)`;
+        elm.style.top = '50%';
+        elm.style.left = '50%';
+
+        testScale = Math.min(scaleFactor, scale);
+    } else {
+        scaleFactor = scale / Math.min(elm.clientWidth / window.innerWidth, elm.clientHeight / window.innerHeight);
+        elm.style.transform = `scale(${Math.min(scaleFactor, scale)})`;
+
+        testScale = Math.min(scaleFactor, scale);
+    }
+}
+
+function resizeCanvasOnScale() {
+    const myCanvas = document.getElementById("myCanvas")
+    scaleBasedOnWindow(myCanvas, 1., true)
+    window.addEventListener("resize", () => {
+        scaleBasedOnWindow(myCanvas, 1., true)
+    })
 }

@@ -3,7 +3,9 @@ myRect.prototype.updateLine = function () {
     if (_params.selectedLine == this.idx) {
         // this.y1 = 0
         const max = _myRects[this.idx + 1].y2
-        const pMouseY = _params.graphicsHorizontal ? width - mouseX : mouseY;
+        // const pMouseY = _params.graphicsHorizontal ? width - mouseX : mouseY;
+        const pMouseY = _params.graphicsHorizontal ? width - mouseX / testScale : (mouseY / testScale);
+        // let pMouseX = _params.graphicsHorizontal ? -1 * (height / 2 - width / 2) + (mouseY / testScale) : (mouseX / testScale)
         this.y2 = map(constrain(pMouseY, this.y1, max), this.y1, max, this.y1, max)
         _myRects[this.idx + 1].y1 = this.y2
     }
