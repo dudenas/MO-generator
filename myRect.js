@@ -22,6 +22,7 @@ class myRect {
         } else {
             cnv.fill(_params.colors.shadow)
         }
+
         cnv.vertex(-this.d1, this.y1)
         cnv.vertex(this.d1, this.y1)
         cnv.vertex(this.d2, this.y2)

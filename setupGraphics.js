@@ -4,6 +4,7 @@ function setupGraphics(cnv) {
     for (let i = 0; i < _params.rectAmount; i++) {
         const mr = new myRect()
         _myRects.push(mr)
+        mr.inputType = i % 2 == 0
     }
 
     updateGraphics(cnv)
@@ -83,7 +84,7 @@ function updateGraphics(cnv) {
         mr.y1 = y1
         mr.dFactor2 = d2
         mr.y2 = y2
-        mr.inputType = i % 2 == 0
+        // mr.inputType = i % 2 == 0
         mr.flunctVal = _params.flunctiotion
 
         y1 = y2

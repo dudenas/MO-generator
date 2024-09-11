@@ -1,0 +1,54 @@
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1 0 0;
+}
+
+.slider-title {
+    display: flex;
+    gap: 8px;
+    color: var(--color-gray-1);
+}
+
+/* reset input style */
+input {
+    border: none;
+    background: none;
+}
+
+/* The slider itself */
+input[type="range"] {
+    appearance: none;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-white);
+}
+
+/* The slider thumb (Chrome, Opera, Safari, Edge) */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* appearance: none; */
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    background: var(--color-white);
+    cursor: pointer;
+}
+
+/* input */
+input[type="number"] {
+    /* input { */
+    display: flex;
+    padding: 6px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    /* flex: 2 0 0; */
+
+    border-radius: 8px;
+    border: 1px solid var(--color-gray-2);
+    color: var(--color-gray-1);
+
+    /* width: 100px; */
+}

@@ -1,0 +1,49 @@
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: var(--color-tooltip);
+    color: var(--color-white);
+    text-align: center;
+    border-radius: 4px;
+    padding: 8px 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    /* Position the tooltip above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    /* Center the tooltip horizontally */
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.tooltip .tooltiptext::after {
+    /* content: ""; */
+    /* position: absolute; */
+    /* top: 100%; */
+    /* Arrow at the bottom of the tooltip */
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    /* Center the arrow horizontally */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    /* border-color: #555 transparent transparent transparent; */
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.info-icon svg {
+    /* Set the default color of the SVG icon */
+    width: 16px;
+    height: 16px;
+}

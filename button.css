@@ -1,0 +1,40 @@
+/* remove button style that is in html */
+button {
+    border: none;
+    background: none;
+    /* color: #A7A5A2; */
+}
+
+/* buttons */
+.custom-file-label,
+.button {
+    display: inline-flex;
+    height: 44px;
+    padding: 6px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    border-radius: 8px;
+    background: var(--color-gray-3);
+    color: var(--color-white);
+
+    width: 100%;
+
+    cursor: pointer;
+}
+
+.custom-file-label:hover,
+.button:hover {
+    background: var(--color-gray-2);
+}
+
+#exportCanvas {
+    background-color: var(--color-white);
+    color: var(--color-gray-4);
+}
+
+#exportCanvas:hover {
+    background-color: var(--color-gray-4);
+    color: var(--color-white);
+}

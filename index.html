@@ -22,11 +22,252 @@
 
     <!-- css -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="slider.css">
+    <link rel="stylesheet" href="text.css">
+    <link rel="stylesheet" href="tooltip.css">
+    <link rel="stylesheet" href="button.css">
+    <link rel="stylesheet" href="toggle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 
 <body>
     <div id="settings">
         <p id="frameRate">Frame Rate : null</p>
+    </div>
+
+    <div id="controls">
+        <div class="navigationButtons">
+            <button id="btnPattern">Pattern</button>
+            <button id="btnColors">Colors</button>
+        </div>
+
+        <div class="saveButtons">
+            <select id="exportOption" class="dropdown button">
+                <option value="PNG">PNG</option>
+                <option value="SVG">SVG</option>
+                <!-- Add more options as needed -->
+            </select>
+            <button id="exportCanvas" class="button">EXPORT</button>
+        </div>
+
+        <div id="controlsPattern" class="controls-tab active">
+            <div class="section">
+                <div class="collapsible">
+                    <div>Canvas</div><i class="fas fa-chevron-down icon"></i>
+                </div>
+                <div class="content">
+                    <div id="resolution-wrapper">
+                        <div class="param-width">
+                            <h4>Width</h4>
+                            <input id="paramsTempWidth" type="number" min="100" max="4096" step="2" value="1920"
+                                onchange="ensureCorrectInputResolution(this)">
+                        </div>
+                        <div class="param-height">
+                            <h4>Height</h4>
+                            <input id="paramsTempHeight" type="number" min="100" max="4096" step="2" value="1080"
+                                onchange="ensureCorrectInputResolution(this)">
+                        </div>
+                    </div>
+                    <button id="applyResolutionChange" class="button">Apply</button>
+                    <div id="fitImage-wrapper">
+                        <h4>Graphics orientation</h4>
+                        <select id="dropDownImage" class="dropdown button" onchange="updateOrientation(this)">
+                            <option value="horizontal">horizontal</option>
+                            <option value="vertical">vertical</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="collapsible">
+                    <div>Pattern </div><i class="fas fa-chevron-down icon"></i>
+                </div>
+                <div class="content">
+                    <button id="buttonRandomisePattern" class="button">Randomise pattern</button>
+                </div>
+            </div>
+            <div class="section">
+                <div class="collapsible">
+                    <div>Rectangles </div><i class="fas fa-chevron-down icon"></i>
+                </div>
+                <div class="content">
+                    <div class="slider">
+                        <div class="slider-title">
+                            <h4>Amount</h4>
+                            <div class="tooltip">
+                                <div class="info-icon"></div>
+                                <span class="tooltiptext">This is a tooltip</span>
+                            </div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="rectAmount-slider" min="3" max="11" value="7"
+                                oninput="updateInput(this)">
+                            <input type="number" id="rectAmount-number" min="3" max="11" value="7"
+                                onchange="updateSlider(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="collapsible">
+                    <div>Corners </div><i class="fas fa-chevron-down icon"></i>
+                </div>
+                <div class="content">
+                    <div class="slider">
+                        <div class="slider-title">
+                            <h4>Inner height</h4>
+                            <div class="tooltip">
+                                <div class="info-icon"></div>
+                            </div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="boundariesMinFactor-slider" min="0" max="1" value="0.3" step=".1"
+                                oninput="updateInput(this, false)">
+                            <input type="number" id="boundariesMinFactor-number" min="0" max="1" value="0.3" step=".1"
+                                onchange="updateSlider(this, false)">
+                        </div>
+                    </div>
+                    <div class="slider">
+                        <div class="slider-title">
+                            <h4>Outer height</h4>
+                            <div class="tooltip">
+                                <div class="info-icon"></div>
+                            </div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="boundariesMaxFactor-slider" min="0" max="1" value="0.3" step=".1"
+                                oninput="updateInput(this, false)">
+                            <input type="number" id="boundariesMaxFactor-number" min="0" max="1" value="0.3" step=".1"
+                                onchange="updateSlider(this, false)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="collapsible">
+                    <div>Fluctuation </div><i class="fas fa-chevron-down icon"></i>
+                </div>
+                <div class="content">
+                    <div class="slider">
+                        <div class="slider-title">
+                            <h4>Corners</h4>
+                            <div class="tooltip">
+                                <div class="info-icon"></div>
+                                <span class="tooltiptext">This is a tooltip</span>
+                            </div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="flunctiotion-slider" min="0" max="1" value="1" step=".1"
+                                oninput="updateInput(this, 2)">
+                            <input type="number" id="flunctiotion-number" min="0" max="1" value="1" step=".1"
+                                onchange="updateSlider(this, 2)">
+                        </div>
+                    </div>
+                    <div class="slider">
+                        <div class="slider-title">
+                            <h4>Rectangles</h4>
+                            <div class="tooltip">
+                                <div class="info-icon"></div>
+                                <span class="tooltiptext">This is a tooltip</span>
+                            </div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="ySymetry-slider" min="0" max="1" value="0.1" step=".1"
+                                oninput="updateInput(this, 3)">
+                            <input type="number" id="ySymetry-number" min="0" max="1" value="0.1" step=".1"
+                                onchange="updateSlider(this, 3)">
+                        </div>
+                    </div>
+                    <div class="toggle-wrap">
+                        <div class="slider-title">
+                            <h4>Natural behavior</h4>
+                            <div class="tooltip">
+                                <div class="info-icon"></div>
+                                <span class="tooltiptext">This is a tooltip</span>
+                            </div>
+                        </div>
+
+                        <!-- create a toggle element -->
+                        <label class="switch">
+                            <input type="checkbox" onchange="flunctiotionNatural(this)" checked>
+                            <span class="toggle round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="collapsible">
+                    <div class="toggle-wrap">
+                        <div class="slider-title">
+                            <h4>Animation</h4>
+                        </div>
+
+                        <!-- create a toggle element -->
+                        <label class="switch">
+                            <input type="checkbox" onchange="animateGraphics(this)">
+                            <span class="toggle round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="toggle-wrap">
+                        <div class="slider-title">
+                            <h4>Animate within</h4>
+                            <div class="tooltip">
+                                <div class="info-icon"></div>
+                                <span class="tooltiptext">This is a tooltip</span>
+                            </div>
+                        </div>
+
+                        <!-- create a toggle element -->
+                        <label class="switch">
+                            <input type="checkbox" onchange="animateWithin(this)" checked>
+                            <span class="toggle round"></span>
+                        </label>
+                    </div>
+                    <div class="slider">
+                        <div class="slider-title">
+                            <h4>Speed</h4>
+                            <div class="tooltip">
+                                <div class="info-icon"></div>
+                                <span class="tooltiptext">This is a tooltip</span>
+                            </div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="animationFrames-slider" min="15" max="60" value="30"
+                                oninput="updateInput(this, 4)">
+                            <input type="number" id="animationFrames-number" min="16" max="60" value="30"
+                                onchange="updateSlider(this, 4)">
+                        </div>
+                    </div>
+                    <div class="slider">
+                        <div class="slider-title">
+                            <h4>Number of movements</h4>
+                            <div class="tooltip">
+                                <div class="info-icon"></div>
+                                <span class="tooltiptext">This is a tooltip</span>
+                            </div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="totalAnimationStages-slider" min="2" max="9" value="3"
+                                oninput="updateInput(this, 5)">
+                            <input type="number" id="totalAnimationStages-number" min="2" max="9" value="3"
+                                onchange="updateSlider(this, 5)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="controlsColors" class="controls-tab">
+            <h3>Controls B</h3>
+            <label for="colors">Colors:</label>
+            <input type="text" id="colors" name="colors">
+            <button id="exportBtn">Export</button>
+        </div>
+
     </div>
 
     <div id="myCanvasWrapper"></div>
@@ -37,13 +278,18 @@
 
     <script src="saveSketch.js"></script>
     <script src="setupGraphics.js"></script>
-    <script src="UI.js"></script>
     <script src="functions.js"></script>
     <script src="params.js"></script>
     <!-- myRect js files -->
     <script src="myRect.js"></script>
     <script src="myRectControls.js"></script>
     <script src="myRectUpdate.js"></script>
+
+    <!-- UI -->
+    <script src="UI.js"></script>
+    <script src="UI-controls.js"></script>
+    <script src="UI-inputs.js"></script>
+
 </body>
 
 </html>

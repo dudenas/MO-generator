@@ -27,7 +27,7 @@ function getSaveFilename() {
 
     // Concatenate year, month, and day in the format YYYYMMDD
     var formattedDate = year + month + day;
-    return "LSU-" + formattedDate
+    return "MO-" + formattedDate
 }
 
 // generateRandomArray: Generates an array of random numbers that sum to 1

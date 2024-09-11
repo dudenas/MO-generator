@@ -1,5 +1,5 @@
 function setup() {
-    initDatGUI()
+    // initDatGUI()
 
     // setup canvas
     setupCanvas();
@@ -9,7 +9,7 @@ function setup() {
 }
 
 
-function setupCanvas() {
+function setupCanvas(recreateGraphics = true) {
     // remove all previous canvases
     $('.p5Canvas').remove();
 
@@ -25,7 +25,10 @@ function setupCanvas() {
     _saveCanvas = createGraphics(_params.width * _sclGrfc, _params.height * _sclGrfc);
 
     // setup graphics
-    setupGraphics(_saveCanvas)
+    if (recreateGraphics) setupGraphics(_saveCanvas)
+    else {
+        updateBoundaries()
+    }
 
     // resizable canvas to fit the window
     resizeCanvasOnScale()

@@ -1,18 +1,159 @@
-body {
-    background-color: black;
+:root {
+    --color-white: #F4F0EC;
+    --color-gray-1: #A7A5A2;
+    --color-gray-2: #5A5957;
+    --color-gray-3: #353535;
+    --color-gray-4: #1F1F1F;
+    --color-tooltip: #4B4B4B;
+    --color-red: #EB1E32;
 }
 
-/* #myCanvasWrapper {
-    left: 50%;
-    top: 50%;
-    position: absolute;
-    transform-origin: center;
-    transform: translate(-50%, -50%);
-} */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: rgb(7, 4, 4);
+}
 
 #myCanvas {
     transform-origin: top left;
     position: absolute;
 
     /* padding: 24px; */
+}
+
+/* 
+STYLE MAP 
+1. CONTROLS
+2. NAVIGATION BUTTONS
+3. SECTIONS
+*/
+
+/* 1. CONTROLS */
+#controls {
+    height: 100vh;
+    width: 360px;
+    background-color: red;
+    position: absolute;
+    right: 0;
+    top: 0;
+    overflow-y: scroll;
+
+    padding-top: 70px;
+
+    /* padding-top: 70px; */
+}
+
+#controls::-webkit-scrollbar {
+    display: none;
+    /* WebKit browsers */
+}
+
+
+.controls-tab {
+    display: none;
+}
+
+.controls-tab.active {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+/* 2. NAVIGATION BUTTONS */
+/* Navigation buttons */
+.navigationButtons {
+    position: fixed;
+    top: 0;
+    left: right;
+    width: 360px;
+
+    display: flex;
+    /* width: 360px; */
+    justify-content: space-between;
+    padding-top: 25px;
+    background-color: var(--color-gray-4);
+
+}
+
+.navigationButtons button {
+    width: 100%;
+    height: 44px;
+    color: var(--color-white);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* 2. SAVE BUTTONS */
+.saveButtons {
+    position: fixed;
+    bottom: 0;
+    left: right;
+    width: calc(360px - 40px);
+
+    background-color: var(--color-gray-4);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* 3. SECTIONS */
+.section {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.collapsible {
+    cursor: pointer;
+    height: 56px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-gray-4);
+}
+
+.collapsible * {
+    color: var(--color-white);
+}
+
+.content {
+    display: none;
+}
+
+.content.active {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 20px;
+    padding-top: 20px;
+}
+
+/* RESOLUTION */
+#resolution-wrapper,
+#fitImage-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#fitImage-wrapper>* {
+    width: 50%;
+}
+
+.param-width,
+.param-height {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }

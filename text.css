@@ -1,0 +1,16 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+    font-size: 16px;
+}
+
+
+h4 {
+    font-size: 16px;
+    color: var(--color-gray-1)
+}
+
+.tooltip .tooltiptext {
+    font-size: 16px;
+    color: var(--color-white);
+}
