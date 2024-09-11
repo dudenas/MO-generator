@@ -110,6 +110,14 @@ document.querySelector('#exportCanvas').addEventListener('click', () => {
         _savePNG = true
     } else if (selectedValue === 'SVG') {
         _saveSVG = true
+    } else if (selectedValue === 'VIDEO') {
+        if (_params.runAnimation) {
+            _totalSaveFrames = _params.animationFrames * _params.totalAnimationStages
+            _recording = true
+            _saveVideo = true
+        } else {
+            alert("Enable animation to save video")
+        }
     }
 
     _saveSketch.redraw()

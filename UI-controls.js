@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 // Add your custom logic here
             } else {
-                console.log(this.firstElementChild)
                 const icon = this.querySelector('.icon');
                 icon.classList.toggle('fa-chevron-down');
                 icon.classList.toggle('fa-chevron-up');

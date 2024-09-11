@@ -36,7 +36,8 @@ function setupCanvas(recreateGraphics = true) {
     // init the saveSketch
     _saveSketch = new p5(svgSketch)
 
-    // noLoop()
+    // init the videoSketch
+    _saveVideoSketch = new p5(videoSketch)
 }
 
 let _myRects
@@ -55,6 +56,14 @@ function draw() {
     // debug graphics
     debugGraphics()
 
+    // show video update
+    showVIDEOupdate()
+
+    // update canvas if recording
+    if (_recording && _saveVideo) {
+        _saveVideoSketch.drawSketch()
+    }
+
     // update framerate
     updateFrameRate()
 }
@@ -62,3 +71,32 @@ function draw() {
 function updateFrameRate() {
     document.getElementById('frameRate').innerText = `Frame Rate: ${Math.floor(frameRate())}`
 }
+
+// function draw() {
+//     _saveCanvas.clear()
+
+//     // set a background of canvas
+//     if (!(_recording && _saveFrames)) {
+//         _saveCanvas.background(_params.colors.background)
+//     }
+
+
+//     // show video update
+//     showVIDEOupdate()
+
+//     // update canvas if recording
+//     if (_recording && _saveVideo) {
+//         _saveVideoSketch.drawSketch()
+//     }
+
+//     // update framerate
+//     updateFrameRate()
+
+//     // save video frames
+//     if (_recording && _saveFrames) {
+//         if (_recordedFrames === 0) {
+//             _capturer.start()
+//         }
+//         saveDrawFrames(_saveCanvas)
+//     }
+// }

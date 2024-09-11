@@ -20,6 +20,9 @@
     <!-- easing functions -->
     <script src="libraries/p5.func.js"></script>
 
+    <!-- MP4 library -->
+    <script src="https://unpkg.com/h264-mp4-encoder/embuild/dist/h264-mp4-encoder.web.js"></script>
+
     <!-- css -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="slider.css">
@@ -46,6 +49,7 @@
             <select id="exportOption" class="dropdown button">
                 <option value="PNG">PNG</option>
                 <option value="SVG">SVG</option>
+                <option value="VIDEO">VIDEO</option>
                 <!-- Add more options as needed -->
             </select>
             <button id="exportCanvas" class="button">EXPORT</button>
@@ -289,6 +293,9 @@
     <script src="UI.js"></script>
     <script src="UI-controls.js"></script>
     <script src="UI-inputs.js"></script>
+
+    <!-- VIDEO -->
+    <script src="saveVideo.js"></script>
 
 </body>
 
