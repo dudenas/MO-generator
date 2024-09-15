@@ -4,6 +4,7 @@
     --color-gray-2: #5A5957;
     --color-gray-3: #353535;
     --color-gray-4: #1F1F1F;
+    --color-gray-5: #121212;
     --color-tooltip: #4B4B4B;
     --color-red: #EB1E32;
 }
@@ -21,8 +22,33 @@ body {
     transform-origin: top left;
     position: absolute;
 
+
     /* padding: 24px; */
 }
+
+select {
+    -webkit-appearance: none;
+    /* Disables the default dropdown appearance in Safari and Chrome */
+    -moz-appearance: none;
+    /* Disables the default dropdown appearance in Firefox */
+    appearance: none;
+    /* General appearance reset for modern browsers */
+
+    border: none;
+    /* Remove borders */
+    padding: 0;
+    /* Reset padding */
+    margin: 0;
+    /* Reset margin */
+    /* outline: none; */
+    /* Disable the outline on focus */
+    background: none;
+    /* Remove background */
+    box-shadow: none;
+    /* Disable box shadow */
+    font: inherit;
+}
+
 
 /* 
 STYLE MAP 
@@ -33,15 +59,16 @@ STYLE MAP
 
 /* 1. CONTROLS */
 #controls {
-    height: 100vh;
+    height: calc(100vh - 70px - 84px);
     width: 360px;
-    background-color: red;
+    background-color: var(--color-gray-5);
     position: absolute;
     right: 0;
     top: 0;
     overflow-y: scroll;
 
     padding-top: 70px;
+    padding-bottom: 84px;
 
     /* padding-top: 70px; */
 }
@@ -83,10 +110,23 @@ STYLE MAP
 .navigationButtons button {
     width: 100%;
     height: 44px;
-    color: var(--color-white);
+    /* color: var(--color-white); */
     background-color: transparent;
     border: none;
     cursor: pointer;
+
+    border-bottom: 1px solid var(--color-gray-3);
+}
+
+.nav-btn.active {
+    color: var(--color-white);
+    font-weight: bold;
+    border-bottom: 1px solid var(--color-white);
+}
+
+.nav-btn {
+    color: var(--color-gray-1);
+    font-weight: light;
 }
 
 /* 2. SAVE BUTTONS */
@@ -95,6 +135,7 @@ STYLE MAP
     bottom: 0;
     left: right;
     width: calc(360px - 40px);
+    z-index: 100;
 
     background-color: var(--color-gray-4);
 
@@ -137,6 +178,17 @@ STYLE MAP
     gap: 20px;
     padding: 0 20px;
     padding-top: 20px;
+}
+
+.title-info {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-icon {
+    display: flex;
 }
 
 /* RESOLUTION */

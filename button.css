@@ -16,7 +16,7 @@ button {
     gap: 8px;
 
     border-radius: 8px;
-    background: var(--color-gray-3);
+    background-color: var(--color-gray-3);
     color: var(--color-white);
 
     width: 100%;
@@ -26,7 +26,7 @@ button {
 
 .custom-file-label:hover,
 .button:hover {
-    background: var(--color-gray-2);
+    background-color: var(--color-gray-2);
 }
 
 #exportCanvas {
@@ -37,4 +37,16 @@ button {
 #exportCanvas:hover {
     background-color: var(--color-gray-4);
     color: var(--color-white);
+}
+
+.dropdown {
+    background-color: var(--color-gray-1);
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat right 10px center;
+    /* Arrow positioning */
+    background-size: 16px;
+    /* Size of the custom arrow */
+    padding-right: 40px;
+
+    border: 1px solid var(--color-gray-2);
+
 }

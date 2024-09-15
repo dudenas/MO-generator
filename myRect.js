@@ -28,5 +28,6 @@ class myRect {
         cnv.vertex(this.d2, this.y2)
         cnv.vertex(-this.d2, this.y2)
         cnv.endShape(cnv.CLOSE)
+        // cnv.endShape()
     }
 }

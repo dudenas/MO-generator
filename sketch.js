@@ -1,6 +1,4 @@
 function setup() {
-    // initDatGUI()
-
     // setup canvas
     setupCanvas();
 

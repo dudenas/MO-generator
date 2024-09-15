@@ -30,19 +30,25 @@
     <link rel="stylesheet" href="tooltip.css">
     <link rel="stylesheet" href="button.css">
     <link rel="stylesheet" href="toggle.css">
+    <link rel="stylesheet" href="colors.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <!-- COLOR PICKER -->
+
+    <!-- Coloris -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
 </head>
 
 <body>
     <div id="settings">
-        <p id="frameRate">Frame Rate : null</p>
+        <p id="frameRate" style="color:var(--color-white)">Frame Rate : null</p>
     </div>
 
     <div id="controls">
         <div class="navigationButtons">
-            <button id="btnPattern">Pattern</button>
-            <button id="btnColors">Colors</button>
+            <button id="btnPattern" class="nav-btn active">Pattern</button>
+            <button id="btnColors" class="nav-btn">Colors</button>
         </div>
 
         <div class="saveButtons">
@@ -60,7 +66,7 @@
                 <div class="collapsible">
                     <div>Canvas</div><i class="fas fa-chevron-down icon"></i>
                 </div>
-                <div class="content">
+                <div class="content active">
                     <div id="resolution-wrapper">
                         <div class="param-width">
                             <h4>Width</h4>
@@ -88,7 +94,7 @@
                 <div class="collapsible">
                     <div>Pattern </div><i class="fas fa-chevron-down icon"></i>
                 </div>
-                <div class="content">
+                <div class="content active">
                     <button id="buttonRandomisePattern" class="button">Randomise pattern</button>
                 </div>
             </div>
@@ -100,10 +106,6 @@
                     <div class="slider">
                         <div class="slider-title">
                             <h4>Amount</h4>
-                            <div class="tooltip">
-                                <div class="info-icon"></div>
-                                <span class="tooltiptext">This is a tooltip</span>
-                            </div>
                         </div>
                         <div class="slider-container">
                             <input type="range" id="rectAmount-slider" min="3" max="11" value="7"
@@ -122,9 +124,6 @@
                     <div class="slider">
                         <div class="slider-title">
                             <h4>Inner height</h4>
-                            <div class="tooltip">
-                                <div class="info-icon"></div>
-                            </div>
                         </div>
                         <div class="slider-container">
                             <input type="range" id="boundariesMinFactor-slider" min="0" max="1" value="0.3" step=".1"
@@ -136,14 +135,11 @@
                     <div class="slider">
                         <div class="slider-title">
                             <h4>Outer height</h4>
-                            <div class="tooltip">
-                                <div class="info-icon"></div>
-                            </div>
                         </div>
                         <div class="slider-container">
-                            <input type="range" id="boundariesMaxFactor-slider" min="0" max="1" value="0.3" step=".1"
+                            <input type="range" id="boundariesMaxFactor-slider" min="0" max="1" value="1.0" step=".1"
                                 oninput="updateInput(this, false)">
-                            <input type="number" id="boundariesMaxFactor-number" min="0" max="1" value="0.3" step=".1"
+                            <input type="number" id="boundariesMaxFactor-number" min="0" max="1" value="1.0" step=".1"
                                 onchange="updateSlider(this, false)">
                         </div>
                     </div>
@@ -151,7 +147,15 @@
             </div>
             <div class="section">
                 <div class="collapsible">
-                    <div>Fluctuation </div><i class="fas fa-chevron-down icon"></i>
+                    <div class="title-info">
+                        <div>Fluctuation </div>
+                        <div class="tooltip">
+                            <div class="info-icon"></div>
+                        </div>
+                        <span class="tooltiptext">Set the variation of rectangles and corners position at your
+                            pattern.</span>
+                    </div>
+                    <i class="fas fa-chevron-down icon"></i>
                 </div>
                 <div class="content">
                     <div class="slider">
@@ -159,13 +163,14 @@
                             <h4>Corners</h4>
                             <div class="tooltip">
                                 <div class="info-icon"></div>
-                                <span class="tooltiptext">This is a tooltip</span>
                             </div>
+                            <span class="tooltiptext">Adjust the variation of corners position at your
+                                pattern.</span>
                         </div>
                         <div class="slider-container">
-                            <input type="range" id="flunctiotion-slider" min="0" max="1" value="1" step=".1"
+                            <input type="range" id="flunctiotion-slider" min="0" max="1" value="0" step=".1"
                                 oninput="updateInput(this, 2)">
-                            <input type="number" id="flunctiotion-number" min="0" max="1" value="1" step=".1"
+                            <input type="number" id="flunctiotion-number" min="0" max="1" value="0" step=".1"
                                 onchange="updateSlider(this, 2)">
                         </div>
                     </div>
@@ -174,8 +179,9 @@
                             <h4>Rectangles</h4>
                             <div class="tooltip">
                                 <div class="info-icon"></div>
-                                <span class="tooltiptext">This is a tooltip</span>
                             </div>
+                            <span class="tooltiptext">Adjust the variation of rectangles position at your
+                                pattern.</span>
                         </div>
                         <div class="slider-container">
                             <input type="range" id="ySymetry-slider" min="0" max="1" value="0.1" step=".1"
@@ -189,8 +195,9 @@
                             <h4>Natural behavior</h4>
                             <div class="tooltip">
                                 <div class="info-icon"></div>
-                                <span class="tooltiptext">This is a tooltip</span>
                             </div>
+                            <span class="tooltiptext">Apply natural behavior if you want more organic look between
+                                corners and rectangles position.</span>
                         </div>
 
                         <!-- create a toggle element -->
@@ -221,8 +228,9 @@
                             <h4>Animate within</h4>
                             <div class="tooltip">
                                 <div class="info-icon"></div>
-                                <span class="tooltiptext">This is a tooltip</span>
                             </div>
+                            <span class="tooltiptext">Apply to keep all rectangles visible during the animation.
+                                Otherwise, some some rectangles will temporarily cover other rectangles.</span>
                         </div>
 
                         <!-- create a toggle element -->
@@ -234,10 +242,6 @@
                     <div class="slider">
                         <div class="slider-title">
                             <h4>Speed</h4>
-                            <div class="tooltip">
-                                <div class="info-icon"></div>
-                                <span class="tooltiptext">This is a tooltip</span>
-                            </div>
                         </div>
                         <div class="slider-container">
                             <input type="range" id="animationFrames-slider" min="15" max="60" value="30"
@@ -251,8 +255,9 @@
                             <h4>Number of movements</h4>
                             <div class="tooltip">
                                 <div class="info-icon"></div>
-                                <span class="tooltiptext">This is a tooltip</span>
                             </div>
+                            <span class="tooltiptext">Adjust the number of times elements will change their position
+                                during the animation.</span>
                         </div>
                         <div class="slider-container">
                             <input type="range" id="totalAnimationStages-slider" min="2" max="9" value="3"
@@ -266,10 +271,88 @@
         </div>
 
         <div id="controlsColors" class="controls-tab">
-            <h3>Controls B</h3>
-            <label for="colors">Colors:</label>
-            <input type="text" id="colors" name="colors">
-            <button id="exportBtn">Export</button>
+            <div class="section">
+                <div class="content active">
+                    <h4>Monochromatic combos</h4>
+                    <div class="clrs-wrapper">
+                        <div class="clrs">
+                            <img class="clrs-btn selected" data-index="0" src="SVG/clrs/colour-0.svg">
+                            <img class="clrs-btn" data-index="1" src="SVG/clrs/colour-1.svg">
+                            <img class="clrs-btn" data-index="2" src="SVG/clrs/colour-2.svg">
+                            <img class="clrs-btn" data-index="3" src="SVG/clrs/colour-3.svg">
+                        </div>
+                        <div class="clrs">
+                            <img class="clrs-btn" data-index="4" src="SVG/clrs/colour-4.svg">
+                            <img class="clrs-btn" data-index="5" src="SVG/clrs/colour-5.svg">
+                            <img class="clrs-btn" data-index="6" src="SVG/clrs/colour-6.svg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="content active">
+                    <h4>Contrasting combos</h4>
+                    <div class="clrs-wrapper">
+                        <div class="clrs">
+                            <img class="clrs-btn" data-index="7" src="SVG/clrs/colour-7.svg">
+                            <img class="clrs-btn" data-index="8" src="SVG/clrs/colour-8.svg">
+                            <img class="clrs-btn" data-index="9" src="SVG/clrs/colour-9.svg">
+                            <img class="clrs-btn" data-index="10" src="SVG/clrs/colour-10.svg">
+                        </div>
+                        <div class="clrs">
+                            <img class="clrs-btn" data-index="11" src="SVG/clrs/colour-11.svg">
+                            <img class="clrs-btn" data-index="12" src="SVG/clrs/colour-12.svg">
+                            <img class="clrs-btn" data-index="13" src="SVG/clrs/colour-13.svg">
+                            <img class="clrs-btn" data-index="14" src="SVG/clrs/colour-14.svg">
+                        </div>
+                        <div class="clrs">
+                            <img class="clrs-btn" data-index="13" src="SVG/clrs/colour-13.svg">
+                            <img class="clrs-btn" data-index="14" src="SVG/clrs/colour-14.svg">
+                            <img class="clrs-btn" data-index="15" src="SVG/clrs/colour-15.svg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="content active">
+                    <h4>Custom</h4>
+                    <div class="clrs-custom-wrapper">
+                        <div class="clrs-custom">
+                            <h5>Rectangle 1</h5>
+                            <div class="example full">
+                                <input type="text" class="coloris instance1" value="#F37884">
+                            </div>
+                        </div>
+                        <div class="clrs-custom">
+                            <h5>Rectangle 2</h5>
+                            <div class="example full">
+                                <input type="text" class="coloris instance2" value="#EB1E32">
+                            </div>
+                        </div>
+                        <div class="clrs-custom">
+                            <h5>Background</h5>
+                            <div class="example full">
+                                <input type="text" class="coloris instance3" value="#000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="content active">
+                    <div class="toggle-wrap">
+                        <div class="slider-title">
+                            <h4>Invert color</h4>
+                        </div>
+
+                        <!-- create a toggle element -->
+                        <label class="switch">
+                            <input type="checkbox" onchange="invertColors(this)">
+                            <span class="toggle round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -293,6 +376,9 @@
     <script src="UI.js"></script>
     <script src="UI-controls.js"></script>
     <script src="UI-inputs.js"></script>
+
+    <!-- colors -->
+    <script src="colors.js"></script>
 
     <!-- VIDEO -->
     <script src="saveVideo.js"></script>

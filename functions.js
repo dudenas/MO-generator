@@ -1,7 +1,7 @@
 // hexToRgb: Converts a hex color to an RGB object
 function hexToRgb(hex) {
     // Remove the hash if it's included
-    hex = hex.replace(/^#/, '');
+    hex = String(hex).replace(/^#/, '');
 
     // Parse the hex value to integers
     var bigint = parseInt(hex, 16);

@@ -1,3 +1,5 @@
+let _circleSize = 1080 / 20
+
 // ————————————————————————————————————————————————————————————————————————————————— Collision
 myRect.prototype.checkCollision = function (ellipseX, ellipseY, ellipseRadius) {
     const pMouseX = _params.graphicsHorizontal ? -1 * (height / 2 - width / 2) + (mouseY / testScale) : (mouseX / testScale)
@@ -13,7 +15,7 @@ myRect.prototype.checkCollision = function (ellipseX, ellipseY, ellipseRadius) {
 myRect.prototype.drawControls = function () {
     const ellipseX = _params.boundariesMax
     const ellipseY = this.y2
-    const ellipseRadius = 20
+    const ellipseRadius = _circleSize
 
     push()
     if (_params.graphicsHorizontal) {
@@ -26,7 +28,9 @@ myRect.prototype.drawControls = function () {
 
     const pMouseX = _params.graphicsHorizontal ? -1 * (height / 2 - width / 2) + (mouseY / testScale) : (mouseX / testScale)
     const pMouseY = _params.graphicsHorizontal ? width - mouseX / testScale : (mouseY / testScale);
-    ellipse(pMouseX, pMouseY, 20, 20)
+
+    fill(_params.colors.background)
+    ellipse(pMouseX, pMouseY, _circleSize, _circleSize)
 
     noFill()
     if (_params.selectedLine == this.idx) {
@@ -41,22 +45,21 @@ myRect.prototype.drawControls = function () {
     if (this.flat) {
         fill(_params.colors.debug)
     }
-    ellipse(width / 2, this.y2 - (this.y2 - this.y1) / 2, ellipseRadius, ellipseRadius)
+    ellipse(width / 2 - _circleSize / 2, this.y2 - (this.y2 - this.y1) / 2, ellipseRadius, ellipseRadius)
 
     // TTYPE
     noFill()
     if (this.inputType) {
         fill(_params.colors.debug)
     }
-    ellipse(width / 2 + 40, this.y2 - (this.y2 - this.y1) / 2, ellipseRadius, ellipseRadius)
+    ellipse(width / 2 + _circleSize / 2, this.y2 - (this.y2 - this.y1) / 2, ellipseRadius, ellipseRadius)
 
 
-    noStroke()
-    fill(_params.colors.debug)
-    textSize(12);
-    text(this.inputType ? "in" : "out", width / 2 + 60, this.y2 - (this.y2 - this.y1) / 2 + 6)
-
-    text(this.idx, width / 2 - 40, this.y2 - (this.y2 - this.y1) / 2 + 6)
+    // noStroke()
+    // fill(_params.colors.debug)
+    // textSize(12);
+    // text(this.inputType ? "in" : "out", width / 2 + 60, this.y2 - (this.y2 - this.y1) / 2 + 6)
+    // text(this.idx, width / 2 - 40, this.y2 - (this.y2 - this.y1) / 2 + 6)
     pop()
 }
 
@@ -64,7 +67,7 @@ myRect.prototype.drawControls = function () {
 myRect.prototype.controlsY = function () {
     const ellipseX = _params.boundariesMax
     const ellipseY = this.y2
-    const ellipseRadius = 20
+    const ellipseRadius = _circleSize
 
     const sideEllipse = this.checkCollision(ellipseX, ellipseY, ellipseRadius)
     if (sideEllipse) {
@@ -86,9 +89,9 @@ myRect.prototype.controlsY = function () {
 
 // ————————————————————————————————————————————————————————————————————————————————— Controls Type
 myRect.prototype.controlsType = function () {
-    const exFlat = 40
+    const exFlat = _circleSize - _circleSize / 2
     const eyFlat = this.y2 - (this.y2 - this.y1) / 2
-    const erFlat = 20
+    const erFlat = _circleSize
 
     const flatEllipse = this.checkCollision(exFlat, eyFlat, erFlat)
     if (flatEllipse) {
@@ -105,9 +108,9 @@ myRect.prototype.controlsType = function () {
 
 // ————————————————————————————————————————————————————————————————————————————————— Controls Flat
 myRect.prototype.controlsFlat = function () {
-    const exFlat = 0
+    const exFlat = -_circleSize / 2
     const eyFlat = this.y2 - (this.y2 - this.y1) / 2
-    const erFlat = 20
+    const erFlat = _circleSize
 
     const flatEllipse = this.checkCollision(exFlat, eyFlat, erFlat)
     if (flatEllipse) {

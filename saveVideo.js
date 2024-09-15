@@ -89,6 +89,7 @@ let videoSketch = function (p) {
     p.drawSketch = function () {
         _videoCanvas = canvas.drawingContext
         p.clear()
+        p.background(_params.colors.background);
         p.image(_saveCanvas, 0, 0)
 
 

@@ -158,6 +158,9 @@ document.querySelector('#applyResolutionChange').addEventListener('click', () =>
 
     console.log(_params.width, _params.height, _params.tempWidth, _params.tempHeight)
     // setupCanvas(recreateGraphics = false);
+
+    _circleSize = min(_params.width / 20, _params.height / 20)
+
     setupCanvas();
 });
 
@@ -194,3 +197,37 @@ function animateGraphics(input) {
     // get the value of the checkbox
     _params.runAnimation = input.checked;
 }
+
+// 6. Colors
+function invertColors(input) {
+    _params.invertColors = input.checked;
+
+    const temp = _params.colors.background
+    _params.colors.background = _params.colors.main
+    _params.colors.main = temp
+
+    changeCustomColorFields()
+}
+
+// 7.Tooltip
+document.addEventListener('DOMContentLoaded', () => {
+    const tooltips = document.querySelectorAll('.tooltip');
+
+    tooltips.forEach(tooltip => {
+        tooltip.addEventListener('mouseenter', () => {
+            const tooltipText = tooltip.nextElementSibling;
+            if (tooltipText && tooltipText.classList.contains('tooltiptext')) {
+                tooltipText.style.visibility = 'visible';
+                tooltipText.style.opacity = '1';
+            }
+        });
+
+        tooltip.addEventListener('mouseleave', () => {
+            const tooltipText = tooltip.nextElementSibling;
+            if (tooltipText && tooltipText.classList.contains('tooltiptext')) {
+                tooltipText.style.visibility = 'hidden';
+                tooltipText.style.opacity = '0';
+            }
+        });
+    });
+});

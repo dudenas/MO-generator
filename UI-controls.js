@@ -3,11 +3,18 @@
 document.getElementById('btnPattern').addEventListener('click', function () {
     document.getElementById('controlsPattern').classList.add('active');
     document.getElementById('controlsColors').classList.remove('active');
+
+    // document.getElementById('btnPattern').classList.add('active');
+    document.getElementById('btnPattern').classList.add('active');
+    document.getElementById('btnColors').classList.remove('active');
 });
 
 document.getElementById('btnColors').addEventListener('click', function () {
     document.getElementById('controlsPattern').classList.remove('active');
     document.getElementById('controlsColors').classList.add('active');
+
+    document.getElementById('btnPattern').classList.remove('active');
+    document.getElementById('btnColors').classList.add('active');
 });
 
 // SECTIONS

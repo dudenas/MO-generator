@@ -1,0 +1,78 @@
+/* 4. colors */
+/* ———————————————————————————————————— */
+.clrs {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.clrs-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.clrs-btn {
+    display: flex;
+    padding: 2px;
+    align-items: center;
+
+    border-radius: 2px;
+    border: 1px solid var(--color-gray-2);
+
+    cursor: pointer;
+}
+
+.clrs-btn:hover,
+.selected {
+    box-sizing: border-box;
+    border-radius: 2px;
+    border: 1px solid var(--color-red);
+}
+
+.example {
+    width: 100%;
+    padding: 2px;
+    border-radius: 2px;
+    border: 1px solid var(--color-gray-2);
+}
+
+.example:hover {
+    border-radius: 2px;
+    border: 1px solid var(--color-red);
+}
+
+input {
+    width: 100%;
+    height: 21px;
+    cursor: pointer;
+}
+
+/* custom colors */
+
+.full .clr-field button {
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+}
+
+.clr-field {
+    width: 100%;
+}
+
+.clrs-custom {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.clrs-custom-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#clr-picker {
+    width: 260px;
+}

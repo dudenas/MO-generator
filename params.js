@@ -8,11 +8,13 @@ let _params = {
 
     colors: {
         background: "#000",
-        main: "#fff",
-        shadow: "#36454F",
-        debug: "#ff0000",
+        shadow: "#EB1E32",
+        main: "#F37884",
+        debug: "#ffffff",
         sub: [255, 0, 85]
     },
+
+    invertColors: false,
 
     strokeWeight: 2,
 

@@ -10,6 +10,11 @@ h4 {
     color: var(--color-gray-1)
 }
 
+h5 {
+    font-size: 14px;
+    color: var(--color-gray-1)
+}
+
 .tooltip .tooltiptext {
     font-size: 16px;
     color: var(--color-white);
