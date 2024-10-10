@@ -1,5 +1,4 @@
 // NAVIGATION
-
 document.getElementById('btnPattern').addEventListener('click', function () {
     document.getElementById('controlsPattern').classList.add('active');
     document.getElementById('controlsColors').classList.remove('active');

@@ -39,6 +39,8 @@ function updateSlider(input, updateCanvas = true) {
     updateSliderProgress(document.getElementById(`${id}-slider`), value, Number(input.min), Number(input.max));
 
     _params[id] = id === "flunctiotion" ? 1 - value : value;
+    _params[id] = id === "animationFrames" ? map(value, 0, 1, 60, 15) : value;
+    console.log(_params[id])
 
     if (updateCanvas === true) {
         setupCanvas()
@@ -69,6 +71,7 @@ function updateInput(input, updateCanvas = true) {
     updateSliderProgress(document.getElementById(`${id}-slider`), value, Number(input.min), Number(input.max));
 
     _params[id] = id === "flunctiotion" ? 1 - value : value;
+    _params[id] = id === "animationFrames" ? map(value, 0, 1, 60, 15) : value;
 
     if (updateCanvas === true) {
         setupCanvas()

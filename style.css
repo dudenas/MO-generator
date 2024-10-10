@@ -60,7 +60,7 @@ STYLE MAP
 /* 1. CONTROLS */
 #controls {
     height: calc(100vh - 70px - 84px);
-    width: 360px;
+    width: 320px;
     background-color: var(--color-gray-5);
     position: absolute;
     right: 0;
@@ -97,10 +97,10 @@ STYLE MAP
     position: fixed;
     top: 0;
     left: right;
-    width: 360px;
+    width: 320px;
 
     display: flex;
-    /* width: 360px; */
+    /* width: 320px; */
     justify-content: space-between;
     padding-top: 25px;
     background-color: var(--color-gray-4);
@@ -134,7 +134,7 @@ STYLE MAP
     position: fixed;
     bottom: 0;
     left: right;
-    width: calc(360px - 40px);
+    width: calc(320px - 40px);
     z-index: 100;
 
     background-color: var(--color-gray-4);

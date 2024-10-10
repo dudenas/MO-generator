@@ -13,7 +13,7 @@ let testScale = 1;
 // Resizing the canvas
 function scaleBasedOnWindow(elm, scale = 1, fit = false) {
     // get window width - UI-container width
-    let targetScale = scale / (elm.clientWidth / (window.innerWidth - 360));
+    let targetScale = scale / (elm.clientWidth / (window.innerWidth - 320));
     // console.log(targetScale)
     scale = Math.max(0.1, scale);
 
@@ -25,7 +25,7 @@ function scaleBasedOnWindow(elm, scale = 1, fit = false) {
         scaleFactor = Math.min(scaleFactor, targetScale);
         elm.style.transform = `scale(${Math.min(scaleFactor, scale)}) translate(-50%, -50%)`;
         elm.style.top = '50%';
-        elm.style.left = 'calc(50% - 180px)';
+        elm.style.left = 'calc(50% - 160px)';
     } else {
         scaleFactor = scale / Math.min(elm.clientWidth / window.innerWidth, elm.clientHeight / window.innerHeight);
         elm.style.transform = `scale(${Math.min(scaleFactor, scale)})`;
