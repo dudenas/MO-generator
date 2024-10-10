@@ -1,5 +1,26 @@
-<svg width="70" height="23" viewBox="0 0 70 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0 2C0 0.89543 0.895431 0 2 0H23.3333V23H2C0.895432 23 0 22.1046 0 21V2Z" fill="#1267F2"/>
-<rect width="23.3333" height="23" transform="translate(23.333)" fill="#0A4928"/>
-<path d="M46.667 0H68.0003C69.1049 0 70.0003 0.895431 70.0003 2V21C70.0003 22.1046 69.1049 23 68.0003 23H46.667V0Z" fill="#71A4F7"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="23" version="1.1" viewBox="0 0 70 23">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #a38f40;
+      }
+
+      .cls-2 {
+        fill: #ffdd58;
+      }
+
+      .cls-3 {
+        fill: #484126;
+      }
+    </style>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <path class="cls-2" d="M0,2C0,.9.9,0,2,0h21.3v23H2c-1.1,0-2-.9-2-2V2Z"/>
+      <rect class="cls-1" x="23.3" y="0" width="23.3" height="23"/>
+      <path class="cls-3" d="M46.7,0h21.3C69.1,0,70,.9,70,2v19c0,1.1-.9,2-2,2h-21.3V0Z"/>
+    </g>
+  </g>
 </svg>
