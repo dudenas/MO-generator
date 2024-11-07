@@ -25,7 +25,17 @@ function showVIDEOupdate() {
 
 function saveVIDEOupdate() {
     if (_recording) {
-        encoder.addFrameRgba(_videoCanvas.getImageData(0, 0, encoder.width, encoder.height).data);
+        // encoder.addFrameRgba(_videoCanvas.getImageData(0, 0, encoder.width, encoder.height).data);
+        const imageData = _videoCanvas.getImageData(0, 0, encoder.width, encoder.height);
+        const clampedArray = imageData.data;
+
+        // Convert Uint8ClampedArray to Uint8Array
+        const data = new Uint8Array(clampedArray.buffer);
+        // console.log(data)
+
+        // Add the frame to the encoder
+        encoder.addFrameRgba(data);
+
         _recordedFrames++
     }
 }
@@ -45,6 +55,7 @@ function saveVIDEO() {
         anchor.href = URL.createObjectURL(new Blob([uint8Array], {
             type: 'video/mp4'
         }))
+
         anchor.download = encoder.outputFilename
         anchor.click()
         encoderReset()
@@ -64,12 +75,15 @@ let videoSketch = function (p) {
     p.setup = function () {
         canvas = p.createCanvas(_params.width * _sclGrfc, _params.height * _sclGrfc)
         _videoCanvas = canvas.drawingContext
+
         // attach to the id
         const parent = document.getElementById('myCanvas')
         const child = canvas.canvas
         parent.appendChild(child);
         $(child).css('display', 'none')
+
         p.pixelDensity(1)
+        p.noSmooth()
     }
 
     p.preload = function () {
@@ -81,6 +95,7 @@ let videoSketch = function (p) {
             encoder.frameRate = 30
             // encoder.kbps = 10000000 // video quality
             encoder.groupOfPictures = 1 // lower if you have fast actions.
+            // encoder.speed = 0 // 0 is best quality, 8 is best speed
             encoder.quantizationParameter = 10 // lower is better quality
             encoder.initialize()
         })

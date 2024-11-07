@@ -13,12 +13,14 @@ let svgSketch = function (p) {
         $(child).css('display', 'none')
 
         p.noLoop()
+        p.pixelDensity(1)
+        p.noSmooth()
     }
 
     p.draw = function () {
         p.clear()
         p.background(_params.colors.background);
-        p.smooth(4)
+        // p.smooth(4)
         drawGraphics(p)
 
         if (_saveSVG) {
