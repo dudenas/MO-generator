@@ -20,6 +20,9 @@
     <!-- easing functions -->
     <script src="libraries/p5.func.js"></script>
 
+    <!-- CCCapture -->
+    <script src="libraries/CCapture.all.min.js"></script>
+
     <!-- MP4 library -->
     <script src="https://unpkg.com/h264-mp4-encoder/embuild/dist/h264-mp4-encoder.web.js"></script>
 
@@ -38,6 +41,7 @@
     <!-- Coloris -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css" />
     <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+
 </head>
 
 <body>
@@ -68,6 +72,7 @@
                 <option value="PNG">PNG</option>
                 <option value="SVG">SVG</option>
                 <option value="VIDEO">VIDEO</option>
+                <option value="SAVE_FRAMES">FRAMES</option>
                 <!-- Add more options as needed -->
             </select>
             <button id="exportCanvas" class="button">EXPORT</button>
@@ -380,6 +385,7 @@
     <script src="sketchDrawGraphics.js"></script>
 
     <script src="saveSketch.js"></script>
+    <script src="saveFrames.js"></script>
     <script src="setupGraphics.js"></script>
     <script src="functions.js"></script>
     <script src="params.js"></script>

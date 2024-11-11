@@ -6,20 +6,20 @@ let _params = {
 
     frameRate: 30,
 
-    colors: {
-        background: "#000",
-        shadow: [255, 0, 0, 255],
-        main: [255, 0, 0, 255],
-        debug: "#ffffff",
-        sub: [255, 0, 85]
-    },
     // colors: {
     //     background: "#000",
-    //     shadow: "#EB1E32",
-    //     main: "#F37884",
+    //     shadow: [255, 0, 0, 255],
+    //     main: [255, 0, 0, 255],
     //     debug: "#ffffff",
     //     sub: [255, 0, 85]
     // },
+    colors: {
+        background: "#000",
+        shadow: "#EB1E32",
+        main: "#F37884",
+        debug: "#ffffff",
+        sub: [255, 0, 85]
+    },
 
     invertColors: false,
 

@@ -115,9 +115,17 @@ document.querySelector('#exportCanvas').addEventListener('click', () => {
         _saveSVG = true
     } else if (selectedValue === 'VIDEO') {
         if (_params.runAnimation) {
-            _totalSaveFrames = _params.animationFrames * _params.totalAnimationStages
+            _totalSaveFrames = (_params.animationFrames * _params.totalAnimationStages) + 1
             _recording = true
             _saveVideo = true
+        } else {
+            alert("Enable animation to save video")
+        }
+    } else if (selectedValue === 'SAVE_FRAMES') {
+        if (_params.runAnimation) {
+            _totalSaveFrames = (_params.animationFrames * _params.totalAnimationStages) + 1
+            _recording = true
+            _saveFrames = true
         } else {
             alert("Enable animation to save video")
         }

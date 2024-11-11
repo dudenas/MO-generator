@@ -3,7 +3,7 @@ let _saveVideoSketch
 let _saveVideo = false
 let _videoCanvas = null
 let _recordedFrames = 0
-let _totalSaveFrames = 120
+let _totalSaveFrames = 0
 let _recording = false
 let _stopRecording = false
 

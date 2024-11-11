@@ -36,6 +36,9 @@ function setupCanvas(recreateGraphics = true) {
 
     // init the videoSketch
     _saveVideoSketch = new p5(videoSketch)
+
+    // set save frames 
+    saveSetupFrames()
 }
 
 let _myRects
@@ -58,8 +61,17 @@ function draw() {
     showVIDEOupdate()
 
     // update canvas if recording
-    if (_recording && _saveVideo) {
-        _saveVideoSketch.drawSketch()
+    if (_recording) {
+        if (_saveVideo) {
+            _saveVideoSketch.drawSketch()
+        }
+
+        if (_saveFrames) {
+            if (_recordedFrames === 0) {
+                _capturer.start()
+            }
+            saveDrawFrames(_saveCanvas)
+        }
     }
 
     // update framerate
