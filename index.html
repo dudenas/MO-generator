@@ -23,9 +23,6 @@
     <!-- CCCapture -->
     <script src="libraries/CCapture.all.min.js"></script>
 
-    <!-- MP4 library -->
-    <script src="https://unpkg.com/h264-mp4-encoder/embuild/dist/h264-mp4-encoder.web.js"></script>
-
     <!-- css -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="slider.css">
@@ -41,6 +38,9 @@
     <!-- Coloris -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css" />
     <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+
+    <!-- Add this in the head section -->
+    <script src="https://cdn.jsdelivr.net/npm/webm-writer@0.3.0/WebMWriter.js"></script>
 
 </head>
 
@@ -71,7 +71,8 @@
             <select id="exportOption" class="dropdown button">
                 <option value="PNG">PNG</option>
                 <option value="SVG">SVG</option>
-                <option value="VIDEO">VIDEO</option>
+                <option value="VIDEO_MP4">VIDEO MP4</option>
+                <option value="VIDEO_WEBM">VIDEO WEBM</option>
                 <option value="SAVE_FRAMES">FRAMES</option>
                 <!-- Add more options as needed -->
             </select>
@@ -404,7 +405,13 @@
     <script src="colors.js"></script>
 
     <!-- VIDEO -->
+    <!-- MP4 library -->
+    <script src="https://cdn.jsdelivr.net/npm/webm-writer@0.3.0/WebMWriter.js"></script>
     <script src="saveVideo.js"></script>
+
+    <!-- Keep both of these -->
+    <script src="https://unpkg.com/h264-mp4-encoder/embuild/dist/h264-mp4-encoder.web.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/webm-writer@0.3.0/WebMWriter.js"></script>
 
 </body>
 

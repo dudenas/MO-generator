@@ -45,7 +45,9 @@ let _myRects
 
 function draw() {
     _saveCanvas.clear()
-
+    if (_saveFrames) {
+        _saveCanvas.background(_params.colors.background);
+    }
     background(_params.colors.background);
 
     // draw graphics

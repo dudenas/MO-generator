@@ -105,33 +105,31 @@ document.querySelector('#buttonRandomisePattern').addEventListener('click', () =
 });
 
 document.querySelector('#exportCanvas').addEventListener('click', () => {
-    // Get the selected value from the dropdown
-    const selectElement = document.querySelector('#exportOption'); // Replace with your actual select element ID
-    const selectedValue = selectElement.value;
-
-    if (selectedValue === 'PNG') {
-        _savePNG = true
-    } else if (selectedValue === 'SVG') {
-        _saveSVG = true
-    } else if (selectedValue === 'VIDEO') {
+    const exportOption = $('#exportOption').val()
+    if (exportOption === 'VIDEO_MP4' || exportOption === 'VIDEO_WEBM') {
         if (_params.runAnimation) {
-            _totalSaveFrames = (_params.animationFrames * _params.totalAnimationStages) + 1
-            _recording = true
-            _saveVideo = true
+            _videoFormat = exportOption === 'VIDEO_MP4' ? 'mp4' : 'webm';
+            _totalSaveFrames = (_params.animationFrames * _params.totalAnimationStages) + 1;
+            _recording = true;
+            _saveVideo = true;
         } else {
-            alert("Enable animation to save video")
+            alert("Enable animation to save video");
         }
-    } else if (selectedValue === 'SAVE_FRAMES') {
+    } else if (exportOption === 'PNG') {
+        _savePNG = true;
+    } else if (exportOption === 'SVG') {
+        _saveSVG = true;
+    } else if (exportOption === 'SAVE_FRAMES') {
         if (_params.runAnimation) {
-            _totalSaveFrames = (_params.animationFrames * _params.totalAnimationStages) + 1
-            _recording = true
-            _saveFrames = true
+            _totalSaveFrames = (_params.animationFrames * _params.totalAnimationStages) + 1;
+            _recording = true;
+            _saveFrames = true;
         } else {
-            alert("Enable animation to save video")
+            alert("Enable animation to save video");
         }
     }
 
-    _saveSketch.redraw()
+    _saveSketch.redraw();
 });
 
 // 2. Canvas
