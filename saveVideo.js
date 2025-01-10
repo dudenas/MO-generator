@@ -13,13 +13,12 @@ let chunks = []
 function initMP4Encoder() {
     try {
         chunks = [];
-        const stream = _videoCanvas.canvas.captureStream(60);
+        // Match capture rate to our animation frame rate
+        const stream = _videoCanvas.canvas.captureStream(30); // Exact 30fps capture
 
-        // Prioritize high-quality codecs first
+        // Try to get the best video format supported by the browser
         const mimeTypes = [
-            'video/mp4;codecs=h264', // High quality H.264
-            'video/mp4;codecs=avc1.42E01E,mp4a.40.2', // Standard H.264
-            'video/mp4;codecs=avc1.64001F', // Fallback H.264
+            'video/mp4;codecs=avc1.64001F',
             'video/webm;codecs=vp9',
             'video/webm;codecs=vp8',
             'video/webm'
@@ -33,8 +32,8 @@ function initMP4Encoder() {
 
         encoder = new MediaRecorder(stream, {
             mimeType: selectedMimeType,
-            videoBitsPerSecond: 500000000, // 500 Mbps for much higher quality
-            frameRate: 30
+            videoBitsPerSecond: 50000000, // 50 Mbps
+            frameRate: 30 // Explicitly set frame rate
         });
 
         encoder.ondataavailable = (e) => {
@@ -43,7 +42,8 @@ function initMP4Encoder() {
             }
         };
 
-        encoder.start(1000 / 30); // Keep 30fps timing
+        // Request frame data at exact 30fps intervals
+        encoder.start(1000 / 30); // Capture every 33.33ms for exact 30fps timing
         _encoderInitializing = false;
     } catch (error) {
         console.error('Video encoder initialization failed:', error);
