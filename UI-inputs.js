@@ -126,14 +126,6 @@ document.querySelector('#exportCanvas').addEventListener('click', () => {
         } else {
             alert("Enable animation to save video");
         }
-    } else if (exportOption === 'HIGH_QUALITY_FRAMES') {
-        if (_params.runAnimation) {
-            _totalSaveFrames = (_params.animationFrames * _params.totalAnimationStages) + 1;
-            _recording = true;
-            _saveHighQualityFrames = true;
-        } else {
-            alert("Enable animation to save high quality frames");
-        }
     }
 
     _saveSketch.redraw();

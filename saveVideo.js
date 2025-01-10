@@ -149,9 +149,3 @@ function showVIDEOupdate() {
         pop()
     }
 }
-
-function saveHighQualityFrame() {
-    // Save individual frame as PNG with maximum quality
-    const dataUrl = _videoCanvas.canvas.toDataURL('image/png', 1.0);
-    // Save frame...
-}
