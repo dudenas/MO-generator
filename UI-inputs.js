@@ -106,9 +106,8 @@ document.querySelector('#buttonRandomisePattern').addEventListener('click', () =
 
 document.querySelector('#exportCanvas').addEventListener('click', () => {
     const exportOption = $('#exportOption').val()
-    if (exportOption === 'VIDEO_MP4' || exportOption === 'VIDEO_WEBM') {
+    if (exportOption === 'VIDEO_MP4') {
         if (_params.runAnimation) {
-            _videoFormat = exportOption === 'VIDEO_MP4' ? 'mp4' : 'webm';
             _totalSaveFrames = (_params.animationFrames * _params.totalAnimationStages) + 1;
             _recording = true;
             _saveVideo = true;
@@ -126,6 +125,14 @@ document.querySelector('#exportCanvas').addEventListener('click', () => {
             _saveFrames = true;
         } else {
             alert("Enable animation to save video");
+        }
+    } else if (exportOption === 'HIGH_QUALITY_FRAMES') {
+        if (_params.runAnimation) {
+            _totalSaveFrames = (_params.animationFrames * _params.totalAnimationStages) + 1;
+            _recording = true;
+            _saveHighQualityFrames = true;
+        } else {
+            alert("Enable animation to save high quality frames");
         }
     }
 

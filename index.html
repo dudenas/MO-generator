@@ -23,6 +23,9 @@
     <!-- CCCapture -->
     <script src="libraries/CCapture.all.min.js"></script>
 
+    <!-- Keep only this for video support -->
+    <script src="https://cdn.jsdelivr.net/npm/webm-writer@0.3.0/WebMWriter.js"></script>
+
     <!-- css -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="slider.css">
@@ -72,7 +75,6 @@
                 <option value="PNG">PNG</option>
                 <option value="SVG">SVG</option>
                 <option value="VIDEO_MP4">VIDEO MP4</option>
-                <option value="VIDEO_WEBM">VIDEO WEBM</option>
                 <option value="SAVE_FRAMES">FRAMES</option>
                 <!-- Add more options as needed -->
             </select>
@@ -410,7 +412,6 @@
     <script src="saveVideo.js"></script>
 
     <!-- Keep both of these -->
-    <script src="https://unpkg.com/h264-mp4-encoder/embuild/dist/h264-mp4-encoder.web.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/webm-writer@0.3.0/WebMWriter.js"></script>
 
 </body>
