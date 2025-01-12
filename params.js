@@ -39,10 +39,10 @@ let _params = {
     graphicsHorizontal: true,
 
     // animation
-    runAnimation: true,
+    runAnimation: true, // false
     animationWithin: true,
     flunctiotionNatural: true,
-    animationFrames: 30,
+    animationFrames: 1, // 30
     animationIndex: 0,
     totalAnimationStages: 3,
 };
