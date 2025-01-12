@@ -14,11 +14,10 @@ let _params = {
     //     sub: [255, 0, 85]
     // },
     colors: {
-        background: "#000",
-        shadow: "#EB1E32",
-        main: "#F37884",
-        debug: "#ffffff",
-        sub: [255, 0, 85]
+        background: "#000000",
+        shadow: "#000000",
+        main: "#000000",
+        debug: "#000000",
     },
 
     invertColors: false,
@@ -40,7 +39,7 @@ let _params = {
     graphicsHorizontal: true,
 
     // animation
-    runAnimation: false,
+    runAnimation: true,
     animationWithin: true,
     flunctiotionNatural: true,
     animationFrames: 30,

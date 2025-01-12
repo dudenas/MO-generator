@@ -9,47 +9,118 @@ let _stopRecording = false
 let _encoderInitializing = false
 let encoder = null
 let chunks = []
+let _restoreColors = null
+let _hasCustomizedColors = false
 
 function initMP4Encoder() {
     try {
         chunks = [];
-        // Match capture rate to our animation frame rate
-        const stream = _videoCanvas.canvas.captureStream(30); // Exact 30fps capture
+        // Check if any color button is selected using the same selector jQuery uses internally
+        const selectedColorBtn = document.querySelector('.clrs-btn.selected');
 
-        // Try to get the best video format supported by the browser
-        const mimeTypes = [
-            'video/mp4;codecs=avc1.64001F',
-            'video/webm;codecs=vp9',
-            'video/webm;codecs=vp8',
-            'video/webm'
-        ];
-
-        let selectedMimeType = mimeTypes.find(type => MediaRecorder.isTypeSupported(type));
-
-        if (!selectedMimeType) {
-            throw new Error('No supported video MIME type found');
-        }
-
-        encoder = new MediaRecorder(stream, {
-            mimeType: selectedMimeType,
-            videoBitsPerSecond: 50000000, // 50 Mbps
-            frameRate: 30 // Explicitly set frame rate
-        });
-
-        encoder.ondataavailable = (e) => {
-            if (e.data && e.data.size > 0) {
-                chunks.push(e.data);
-            }
+        // Save current colors to restore later
+        const savedColors = {
+            main: _params.colors.main.slice(),
+            shadow: _params.colors.shadow.slice(),
+            background: _params.colors.background.slice(),
+            debug: _params.colors.debug.slice()
         };
 
-        // Request frame data at exact 30fps intervals
-        encoder.start(1000 / 30); // Capture every 33.33ms for exact 30fps timing
-        _encoderInitializing = false;
+        // Save inversion state but don't change it
+        const wasInverted = _params.invertColors;
+
+        // Use appropriate color set and apply immediately
+        const mp4ColorSet = mp4ColorArray[selectedColorBtn ? currentColorSetIndex + 1 : 0];
+
+        if (!_hasCustomizedColors) {
+            if (selectedColorBtn) {
+                // For selected colors, use the same pattern as changeColors()
+                let col1 = mp4ColorSet[0];
+                let col2 = mp4ColorSet[1];
+
+                if (_params.invertColors) {
+                    const temp = col1;
+                    col1 = col2;
+                    col2 = temp;
+                }
+
+                _params.colors.background = hexToRgb(col1);
+                _params.colors.main = hexToRgb(col2);
+                _params.colors.shadow = hexToRgb(mp4ColorSet[2]);
+                _params.colors.debug = hexToRgb(mp4ColorSet[3]);
+            } else {
+                let col1 = mp4ColorSet[0];
+                let col2 = mp4ColorSet[1];
+
+                if (_params.invertColors) {
+                    const temp = col1;
+                    col1 = col2;
+                    col2 = temp;
+                }
+
+                _params.colors.background = hexToRgb(col1);
+                _params.colors.main = hexToRgb(col2);
+                _params.colors.shadow = hexToRgb(mp4ColorSet[2]);
+                _params.colors.debug = hexToRgb(mp4ColorSet[3]);
+            }
+        }
+
+        changeCustomColorFields(); // Update colors immediately
+
+        // Wait for next frame to ensure colors are applied
+        requestAnimationFrame(() => {
+            const stream = _videoCanvas.canvas.captureStream(30);
+
+            // Try to get the best video format supported by the browser
+            const mimeTypes = [
+                'video/mp4;codecs=avc1.64001F',
+                'video/webm;codecs=vp9',
+                'video/webm;codecs=vp8',
+                'video/webm'
+            ];
+
+            let selectedMimeType = mimeTypes.find(type => MediaRecorder.isTypeSupported(type));
+
+            if (!selectedMimeType) {
+                throw new Error('No supported video MIME type found');
+            }
+
+            encoder = new MediaRecorder(stream, {
+                mimeType: selectedMimeType,
+                videoBitsPerSecond: 50000000,
+                frameRate: 30
+            });
+
+            encoder.ondataavailable = (e) => {
+                if (e.data && e.data.size > 0) {
+                    chunks.push(e.data);
+                }
+            };
+
+            encoder.start();
+            _encoderInitializing = false;
+        });
+
+        // Store the color restoration function
+        _restoreColors = () => {
+            _params.colors.main = savedColors.main;
+            _params.colors.shadow = savedColors.shadow;
+            _params.colors.background = savedColors.background;
+            _params.colors.debug = savedColors.debug;
+            _params.invertColors = wasInverted;
+            changeCustomColorFields();
+        };
+
     } catch (error) {
         console.error('Video encoder initialization failed:', error);
         alert('Video recording is not supported in your browser');
         _recording = false;
         _saveVideo = false;
+
+        // Restore colors on error
+        _params.colors = savedColors;
+        _params.invertColors = wasInverted;
+        changeCustomColorFields();
     }
 }
 
@@ -88,6 +159,13 @@ function saveVIDEO() {
             a.download = getSaveFilename() + '.mp4';
             a.click();
             URL.revokeObjectURL(url);
+
+            // Restore colors using the stored function
+            if (_restoreColors) {
+                _restoreColors();
+                _restoreColors = null;
+            }
+
             encoderReset();
         };
         encoder.stop();
