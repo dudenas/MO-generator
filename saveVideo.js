@@ -205,7 +205,16 @@ let videoSketch = function (p) {
     p.drawSketch = function () {
         p.clear();
         p.background(_params.colors.background);
+
+        // Add signature pixel
+        drawSignature(p)
+
         p.image(_saveCanvas, 0, 0);
+
+        // Add signature pixel
+        p.loadPixels();
+        p.set(10, 10, p.color(0, 0, 255)); // Blue pixel at 10,10
+        p.updatePixels();
 
         saveVIDEOupdate();
         saveVIDEO();

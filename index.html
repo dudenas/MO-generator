@@ -72,16 +72,16 @@
 
         <div class="saveButtons">
             <select id="exportOption" class="dropdown button">
-                <option value="PNG">PNG</option>
+                <option value="PNG" selected>PNG</option>
                 <option value="SVG">SVG</option>
-                <option value="VIDEO_MP4" selected>VIDEO MP4</option>
+                <option value="VIDEO_MP4">VIDEO MP4</option>
                 <option value="SAVE_FRAMES">FRAMES</option>
                 <!-- Add more options as needed -->
             </select>
             <button id="exportCanvas" class="button">EXPORT</button>
         </div>
 
-        <div id="controlsPattern" class="controls-tab">
+        <div id="controlsPattern" class="controls-tab active">
             <div class="section">
                 <div class="collapsible">
                     <div>Canvas</div><i class="fas fa-chevron-up icon"></i>
@@ -290,7 +290,7 @@
             </div>
         </div>
 
-        <div id="controlsColors" class="controls-tab active">
+        <div id="controlsColors" class="controls-tab">
             <div class="section">
                 <div class="content active">
                     <h4>Monochromatic combos</h4>

@@ -20,6 +20,10 @@ let svgSketch = function (p) {
     p.draw = function () {
         p.clear()
         p.background(_params.colors.background);
+
+        // Add signature pixel (as tiny rectangle for SVG compatibility)
+        drawSignature(p)
+
         // p.smooth(4)
         drawGraphics(p)
 

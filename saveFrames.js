@@ -14,6 +14,9 @@ function saveSetupFrames() {
 
 function saveDrawFrames(canvas) {
     if (_saveFrames) {
+        // Add signature pixel (as tiny rectangle for SVG compatibility)
+        drawSignature(canvas)
+
         _capturer.capture(canvas.elt);
         _recordedFrames++
         if (_recordedFrames > _totalSaveFrames) {

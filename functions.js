@@ -112,3 +112,12 @@ function generateRandomArrayZero(numPoints, diversity, minValue, animationWithin
 
     return finalValues;
 }
+
+// drawSignature: Draws a signature pixel
+function drawSignature(p) {
+    p.push()
+    p.noStroke();
+    p.fill(0, 0, 255);
+    p.rect(10, 10, 1, 1);
+    p.pop()
+}
